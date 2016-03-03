@@ -40,7 +40,8 @@
 
 
 <meta name="description" content="#用户管理，文件管理，文件权限，sudo权限下放
-##账号管理切换用户
+##账号管理
+切换用户
 su student 和 su - student的区别
 前者只是把用户切换到student，但是环境还没有切换到student的环境
 注意：切换用户的时候最好要写su - student
@@ -51,13 +52,14 @@ su student 和 su - student的区别
 
 -u： 指定UID。
 
-1# useradd -u 500 tes">
+1# useradd -u 500 te">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用户管理，文件管理，文件权限，sudo权限下放">
 <meta property="og:url" content="http://cherishry.github.io/2015-09-03-用户管理，文件管理，文件权限，sudo权限下放.html">
 <meta property="og:site_name" content="cherishry's Blog">
 <meta property="og:description" content="#用户管理，文件管理，文件权限，sudo权限下放
-##账号管理切换用户
+##账号管理
+切换用户
 su student 和 su - student的区别
 前者只是把用户切换到student，但是环境还没有切换到student的环境
 注意：切换用户的时候最好要写su - student
@@ -68,12 +70,13 @@ su student 和 su - student的区别
 
 -u： 指定UID。
 
-1# useradd -u 500 tes">
-<meta property="og:updated_time" content="2016-03-03T08:31:13.193Z">
+1# useradd -u 500 te">
+<meta property="og:updated_time" content="2016-03-03T08:52:47.336Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用户管理，文件管理，文件权限，sudo权限下放">
 <meta name="twitter:description" content="#用户管理，文件管理，文件权限，sudo权限下放
-##账号管理切换用户
+##账号管理
+切换用户
 su student 和 su - student的区别
 前者只是把用户切换到student，但是环境还没有切换到student的环境
 注意：切换用户的时候最好要写su - student
@@ -84,7 +87,7 @@ su student 和 su - student的区别
 
 -u： 指定UID。
 
-1# useradd -u 500 tes">
+1# useradd -u 500 te">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -253,7 +256,8 @@ su student 和 su - student的区别
 
       
         <span itemprop="articleBody"><p>#用户管理，文件管理，文件权限，sudo权限下放</p>
-<p>##账号管理<br>切换用户</p>
+<p>##账号管理</p>
+<p>切换用户</p>
 <p><code>su student</code> 和 <code>su - student</code>的区别</p>
 <p>前者只是把用户切换到<code>student</code>，但是环境还没有切换到<code>student</code>的环境</p>
 <p>注意：切换用户的时候最好要写<code>su - student</code></p>
@@ -305,7 +309,8 @@ su student 和 su - student的区别
 </ul>
 <p><strong>如果</strong>不加<code>-r</code>,<code>/etc/passwd /etc/group</code>会发生相应变化，但是用户所对应的家目录不会被删除，当下次再创建此用户的时候，就会报错，<code>home directory</code>和<code>mailbox file</code>已经存在。</p>
 <p><strong>但是</strong>报错也不怕，我们只要手动的去删除此用户的家目录和对应的邮件池就好啦！</p>
-<p>###修改用户<br>命令：<code>usermod</code></p>
+<p>###修改用户</p>
+<p>命令：<code>usermod</code></p>
 <p>部分参数：</p>
 <ul>
 <li><p>注：usermod的常用参数和useradd相似，前面学习过的，这里不再详解</p>
@@ -380,7 +385,23 @@ su student 和 su - student的区别
 <p>eg.</p>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chown haha.haha <span class="regexp">/mnt/</span>test</span><br><span class="line">chown <span class="string">haha:</span>haha <span class="regexp">/mnt/</span>test</span><br></pre></td></tr></table></figure>
 <p>###文件权限的管理</p>
-<p>####基本权限<br>| u | g | o |<br>|—|—|—|<br>| user | group | other |</p>
+<p>####基本权限</p>
+<table>
+<thead>
+<tr>
+<th>u</th>
+<th>g</th>
+<th>o</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user</td>
+<td>group</td>
+<td>other</td>
+</tr>
+</tbody>
+</table>
 <table>
 <thead>
 <tr>
