@@ -30,7 +30,7 @@
 
 
 
-  <meta name="keywords" content="Hexo,next" />
+  <meta name="keywords" content="linux操作系统," />
 
 
 
@@ -39,40 +39,45 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="#Shell脚本8种字符串截取方法总结Linux 的字符串截取很有用,有八种方法。
-假设有变量 var=http://www.aaa.com/123.html.
+<meta name="description" content="附上两张图，加深记忆
+图1：
 
-# 号截取，删除左边字符，保留右边字符。
+图2：
 
-如下:
-1echo $&amp;#123;var#*//&amp;#125;
-其中 var 是变量名，# 号是运算符，*// 表示从左边开始删除第一个 // 号及左边的所有字符即删除 http://
-结果是">
+第一张图比较简洁明了，下面对第一张图的步骤进行详解：
+
+启动第一步－－加载BIOS
+
+当你打开计算机电源，计算机会首先加载BIOS信息，BIOS信息是如此的重要，以至于计算机必须在最开始就找到它。这是因为BIOS中包含了CPU的相关信息、设备启动顺序信息、硬盘信息、内存信息、时钟信息、PnP特性等等。在此之后，计算机心里就有谱了，知道应该去读取哪个硬件设备">
 <meta property="og:type" content="article">
-<meta property="og:title" content="cherishry's Blog">
-<meta property="og:url" content="http://cherishry.github.io/2016-03-02-Shell脚本8种字符串截取方法总结.html">
+<meta property="og:title" content="linux启动过程详解">
+<meta property="og:url" content="http://cherishry.github.io/2015-09-02-linux启动过程详解.html">
 <meta property="og:site_name" content="cherishry's Blog">
-<meta property="og:description" content="#Shell脚本8种字符串截取方法总结Linux 的字符串截取很有用,有八种方法。
-假设有变量 var=http://www.aaa.com/123.html.
+<meta property="og:description" content="附上两张图，加深记忆
+图1：
 
-# 号截取，删除左边字符，保留右边字符。
+图2：
 
-如下:
-1echo $&amp;#123;var#*//&amp;#125;
-其中 var 是变量名，# 号是运算符，*// 表示从左边开始删除第一个 // 号及左边的所有字符即删除 http://
-结果是">
-<meta property="og:updated_time" content="2016-01-27T07:28:17.996Z">
+第一张图比较简洁明了，下面对第一张图的步骤进行详解：
+
+启动第一步－－加载BIOS
+
+当你打开计算机电源，计算机会首先加载BIOS信息，BIOS信息是如此的重要，以至于计算机必须在最开始就找到它。这是因为BIOS中包含了CPU的相关信息、设备启动顺序信息、硬盘信息、内存信息、时钟信息、PnP特性等等。在此之后，计算机心里就有谱了，知道应该去读取哪个硬件设备">
+<meta property="og:image" content="http://7xo95f.com1.z0.glb.clouddn.com/26495963_1348382510SRUx.png">
+<meta property="og:image" content="http://7xo95f.com1.z0.glb.clouddn.com/20121028012429771.jpg">
+<meta property="og:updated_time" content="2016-03-03T08:30:08.965Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cherishry's Blog">
-<meta name="twitter:description" content="#Shell脚本8种字符串截取方法总结Linux 的字符串截取很有用,有八种方法。
-假设有变量 var=http://www.aaa.com/123.html.
+<meta name="twitter:title" content="linux启动过程详解">
+<meta name="twitter:description" content="附上两张图，加深记忆
+图1：
 
-# 号截取，删除左边字符，保留右边字符。
+图2：
 
-如下:
-1echo $&amp;#123;var#*//&amp;#125;
-其中 var 是变量名，# 号是运算符，*// 表示从左边开始删除第一个 // 号及左边的所有字符即删除 http://
-结果是">
+第一张图比较简洁明了，下面对第一张图的步骤进行详解：
+
+启动第一步－－加载BIOS
+
+当你打开计算机电源，计算机会首先加载BIOS信息，BIOS信息是如此的重要，以至于计算机必须在最开始就找到它。这是因为BIOS中包含了CPU的相关信息、设备启动顺序信息、硬盘信息、内存信息、时钟信息、PnP特性等等。在此之后，计算机心里就有谱了，知道应该去读取哪个硬件设备">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -82,7 +87,7 @@
   };
 </script>
 
-  <title>  | cherishry's Blog </title>
+  <title> linux启动过程详解 | cherishry's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -197,7 +202,7 @@
           
           
             
-              
+              linux启动过程详解
             
           
         </h1>
@@ -206,11 +211,26 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2016-03-02T20:16:03+08:00" content="2016-03-02">
-            2016-03-02
+          <time itemprop="dateCreated" datetime="2015-09-02T21:03:31+08:00" content="2015-09-02">
+            2015-09-02
           </time>
         </span>
 
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/linux操作系统/" itemprop="url" rel="index">
+                  <span itemprop="name">linux操作系统</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
         
 
         
@@ -225,83 +245,81 @@
       
 
       
-        <span itemprop="articleBody"><p>#Shell脚本8种字符串截取方法总结<br>Linux 的字符串截取很有用,有八种方法。</p>
-<p>假设有变量 <code>var=http://www.aaa.com/123.html.</code></p>
+        <span itemprop="articleBody"><p>附上两张图，加深记忆</p>
+<p>图1：</p>
+<p><img src="http://7xo95f.com1.z0.glb.clouddn.com/26495963_1348382510SRUx.png" alt="png"></p>
+<p>图2：</p>
+<p><img src="http://7xo95f.com1.z0.glb.clouddn.com/20121028012429771.jpg" alt=""></p>
+<p>第一张图比较简洁明了，下面对第一张图的步骤进行详解：</p>
 <ul>
-<li><code>#</code> 号截取，删除左边字符，保留右边字符。</li>
+<li>启动第一步－－加载BIOS</li>
 </ul>
-<p>如下:</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> $&#123;<span class="keyword">var</span><span class="comment">#*//&#125;</span></span><br></pre></td></tr></table></figure>
-<p>其中 <code>var</code> 是变量名，<code>#</code> 号是运算符，<code>*//</code> 表示从左边开始删除第一个 <code>//</code> 号及左边的所有字符<br>即删除 <code>http://</code></p>
-<p>结果是 ：<code>www.aaa.com/123.html</code></p>
+<p>当你打开计算机电源，计算机会首先加载BIOS信息，BIOS信息是如此的重要，以至于计算机必须在最开始就找到它。这是因为BIOS中包含了CPU的相关信息、设备启动顺序信息、硬盘信息、内存信息、时钟信息、PnP特性等等。在此之后，计算机心里就有谱了，知道应该去读取哪个硬件设备了。</p>
 <ul>
-<li><code>##</code> 号截取，删除左边字符，保留右边字符。</li>
+<li>启动第二步－－读取MBR</li>
 </ul>
-<p>如下:</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> $&#123;<span class="keyword">var</span><span class="comment">##*/&#125;</span></span><br></pre></td></tr></table></figure>
-<p><code>##*/</code> 表示从左边开始,删除最后（最右边）一个 <code>/</code> 号及左边的所有字符<br>即删除 <code>http://www.aaa.com/</code></p>
-<p>结果是: <code>123.html</code></p>
+<p>众所周知，硬盘上第0磁道第一个扇区被称为MBR，也就是Master Boot Record，即主引导记录，它的大小是512字节，别看地方不大，可里面却存放了预启动信息、分区表信息。</p>
+<p>系统找到BIOS所指定的硬盘的MBR后，就会将其复制到0×7c00地址所在的物理内存中。其实被复制到物理内存的内容就是Boot Loader，而具体到你的电脑，那就是lilo或者grub了。</p>
 <ul>
-<li><code>%</code>号截取，删除右边字符，保留左边字符</li>
+<li>启动第三步－－Boot Loader</li>
 </ul>
-<p>如下:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;var%/*&#125;</span></span><br></pre></td></tr></table></figure>
-<p><code>%/*</code> 表示从右边开始，删除第一个<code>/</code> 号及右边的字符</p>
-<p>结果是：<code>http://www.aaa.com</code></p>
+<p>Boot Loader 就是在操作系统内核运行之前运行的一段小程序。通过这段小程序，我们可以初始化硬件设备、建立内存空间的映射图，从而将系统的软硬件环境带到一个合适的状态，以便为最终调用操作系统内核做好一切准备。</p>
+<p>Boot Loader有若干种，其中Grub、Lilo和spfdisk是常见的Loader。</p>
+<p>我们以Grub为例来讲解吧，毕竟用lilo和spfdisk的人并不多。</p>
+<p>系统读取内存中的grub配置信息（一般为menu.lst或grub.lst），并依照此配置信息来启动不同的操作系统。</p>
 <ul>
-<li><code>%%</code> 号截取，删除右边字符，保留左边字符</li>
+<li>启动第四步－－加载内核</li>
 </ul>
-<p>如下:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;var%%/*&#125;</span></span><br></pre></td></tr></table></figure>
-<p><code>%%/*</code> 表示从右边开始，删除最后（最左边）一个 <code>/</code> 号及右边的字符</p>
-<p>结果是：<code>http:</code></p>
+<p>根据grub设定的内核映像所在路径，系统读取内存映像，并进行解压缩操作。此时，屏幕一般会输出“Uncompressing Linux”的提示。当解压缩内核完成后，屏幕输出“OK, booting the kernel”。<br>系统将解压后的内核放置在内存之中，并调用start_kernel()函数来启动一系列的初始化函数并初始化各种设备，完成Linux核心环境的建立。至此，Linux内核已经建立起来了，基于Linux的程序应该可以正常运行了。</p>
 <ul>
-<li>从左边第几个字符开始，及字符的个数</li>
+<li>启动第五步－－用户层init依据inittab文件来设定运行等级</li>
 </ul>
-<p>如下:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;var:0:5&#125;</span></span><br></pre></td></tr></table></figure>
-<p>其中的 <code>0</code> 表示左边第一个字符开始，<code>5</code> 表示字符的总个数。</p>
-<p>结果是：<code>http:</code></p>
+<p>内核被加载后，第一个运行的程序便是/sbin/init，该文件会读取/etc/inittab文件，并依据此文件来进行初始化工作。</p>
+<p>其实/etc/inittab文件最主要的作用就是设定Linux的运行等级，其设定形式是“：id:5:initdefault:”，这就表明Linux需要运行在等级5上。Linux的运行等级设定如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span>：关机</span><br><span class="line"><span class="number">1</span>：单用户模式</span><br><span class="line"><span class="number">2</span>：无网络支持的多用户模式</span><br><span class="line"><span class="number">3</span>：有网络支持的多用户模式</span><br><span class="line"><span class="number">4</span>：保留，未使用</span><br><span class="line"><span class="number">5</span>：有网络支持有X-Window支持的多用户模式</span><br><span class="line"><span class="number">6</span>：重新引导系统，即重启</span><br></pre></td></tr></table></figure>
+<p>关于/etc/inittab文件的学问，其实还有很多</p>
 <ul>
-<li>从左边第几个字符开始，一直到结束。</li>
+<li>启动第六步－－init进程执行rc.sysinit</li>
 </ul>
-<p>如下:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;var:7&#125;</span></span><br></pre></td></tr></table></figure>
-<p>其中的 <code>7</code> 表示左边第<code>8</code>个字符开始，一直到结束。</p>
-<p>结果是 ：<code>www.aaa.com/123.html</code></p>
+<p>在设定了运行等级后，Linux系统执行的第一个用户层文件就是/etc/rc.d/rc.sysinit脚本程序，它做的工作非常多，包括设定PATH、设定网络配置（/etc/sysconfig/network）、启动swap分区、设定/proc等等。如果你有兴趣，可以到/etc/rc.d中查看一下rc.sysinit文件。</p>
 <ul>
-<li>从右边第几个字符开始，及字符的个数</li>
+<li>启动第七步－－启动内核模块</li>
 </ul>
-<p>如下:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $&#123;var:<span class="number">0</span>-<span class="number">7</span>:<span class="number">3</span>&#125;</span><br></pre></td></tr></table></figure>
-<p>其中的 <code>0-7</code> 表示右边算起第七个字符开始，<code>3</code> 表示字符的个数。</p>
-<p>结果是：<code>123</code></p>
+<p>具体是依据/etc/modules.conf文件或/etc/modules.d目录下的文件来装载内核模块。</p>
+<p>启动第八步－－执行不同运行级别的脚本程序</p>
+<p>根据运行级别的不同，系统会运行rc0.d到rc6.d中的相应的脚本程序，来完成相应的初始化工作和启动相应的服务。</p>
+<p>启动第九步－－执行/etc/rc.d/rc.local<br>你如果打开了此文件，里面有一句话，读过之后，你就会对此命令的作用一目了然：</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># This script will be executed *after* all the other init scripts.</span></span><br><span class="line"><span class="preprocessor"># You can put your own initialization stuff in here if you don’t</span></span><br><span class="line"><span class="preprocessor"># want to do the full Sys V style init stuff.</span></span><br></pre></td></tr></table></figure>
+<p>rc.local就是在一切初始化工作后，Linux留给用户进行个性化的地方。你可以把你想设置和启动的东西放到这里。</p>
 <ul>
-<li>从右边第几个字符开始，一直到结束。</li>
+<li>启动第十步－－执行/bin/login程序，进入登录状态</li>
 </ul>
-<p>如下:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;var:0-7&#125;</span></span><br></pre></td></tr></table></figure>
-<p>表示从右边第七个字符开始，一直到结束。</p>
-<p>结果是：<code>123.html</code></p>
-<p>注：（左边的第一个字符是用 0 表示，右边的第一个字符用 0-1 表示）</p>
+<p>此时，系统已经进入到了等待用户输入username和password的时候了，你已经可以用自己的帐号登入系统了。</p>
+<p>漫长的启动过程结束了，一切都清静了…</p>
+<p>其实在这背后，还有着更加复杂的底层函数调用。</p>
+<p>本文参考：<a href="http://blog.chinaunix.net/uid-26495963-id-3066282.html" target="_blank" rel="external">http://blog.chinaunix.net/uid-26495963-id-3066282.html</a></p>
 </span>
       
     </div>
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/linux操作系统/" rel="tag">#linux操作系统</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016-03-02-linux启动过程详解.html" rel="prev"></a>
+              <a href="/2015-09-03-Shell脚本8种字符串截取方法总结.html" rel="prev">Shell脚本8种字符串截取方法总结</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016-03-02-hello-world.html" rel="next">Hello World</a>
             
           </div>
         </div>
@@ -363,21 +381,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

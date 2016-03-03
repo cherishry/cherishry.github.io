@@ -30,7 +30,7 @@
 
 
 
-  <meta name="keywords" content="Hexo,next" />
+  <meta name="keywords" content="shell," />
 
 
 
@@ -39,31 +39,40 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="1、最简单的方法，直接使用默认分区，因为是虚拟机，不需要太多设置的。
-2、必须进行的分区方法。Linux的分区必须有两个分区，一个是/根分区，一个是swap交换分区。
-3、较规矩的分区方法，除了必须的/根分区和swap交换分区，一般还要单独分boot分区和home分区。
-/:根分区，至少要8G的空间，当然多多益善。
-/boot:该分区是引导分区，一般在100M~200M即可。
-/swap:交换分区">
+<meta name="description" content="#Shell脚本8种字符串截取方法总结Linux 的字符串截取很有用,有八种方法。
+假设有变量 var=http://www.aaa.com/123.html.
+
+# 号截取，删除左边字符，保留右边字符。
+
+如下:
+1echo $&amp;#123;var#*//&amp;#125;
+其中 var 是变量名，# 号是运算符，*// 表示从左边开始删除第一个 // 号及左边的所有字符即删除 http://
+结果是">
 <meta property="og:type" content="article">
-<meta property="og:title" content="cherishry's Blog">
-<meta property="og:url" content="http://cherishry.github.io/2016-03-02-装系统时的分区问题.html">
+<meta property="og:title" content="Shell脚本8种字符串截取方法总结">
+<meta property="og:url" content="http://cherishry.github.io/2015-09-03-Shell脚本8种字符串截取方法总结.html">
 <meta property="og:site_name" content="cherishry's Blog">
-<meta property="og:description" content="1、最简单的方法，直接使用默认分区，因为是虚拟机，不需要太多设置的。
-2、必须进行的分区方法。Linux的分区必须有两个分区，一个是/根分区，一个是swap交换分区。
-3、较规矩的分区方法，除了必须的/根分区和swap交换分区，一般还要单独分boot分区和home分区。
-/:根分区，至少要8G的空间，当然多多益善。
-/boot:该分区是引导分区，一般在100M~200M即可。
-/swap:交换分区">
-<meta property="og:updated_time" content="2016-01-23T11:13:38.161Z">
+<meta property="og:description" content="#Shell脚本8种字符串截取方法总结Linux 的字符串截取很有用,有八种方法。
+假设有变量 var=http://www.aaa.com/123.html.
+
+# 号截取，删除左边字符，保留右边字符。
+
+如下:
+1echo $&amp;#123;var#*//&amp;#125;
+其中 var 是变量名，# 号是运算符，*// 表示从左边开始删除第一个 // 号及左边的所有字符即删除 http://
+结果是">
+<meta property="og:updated_time" content="2016-03-03T08:30:41.487Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cherishry's Blog">
-<meta name="twitter:description" content="1、最简单的方法，直接使用默认分区，因为是虚拟机，不需要太多设置的。
-2、必须进行的分区方法。Linux的分区必须有两个分区，一个是/根分区，一个是swap交换分区。
-3、较规矩的分区方法，除了必须的/根分区和swap交换分区，一般还要单独分boot分区和home分区。
-/:根分区，至少要8G的空间，当然多多益善。
-/boot:该分区是引导分区，一般在100M~200M即可。
-/swap:交换分区">
+<meta name="twitter:title" content="Shell脚本8种字符串截取方法总结">
+<meta name="twitter:description" content="#Shell脚本8种字符串截取方法总结Linux 的字符串截取很有用,有八种方法。
+假设有变量 var=http://www.aaa.com/123.html.
+
+# 号截取，删除左边字符，保留右边字符。
+
+如下:
+1echo $&amp;#123;var#*//&amp;#125;
+其中 var 是变量名，# 号是运算符，*// 表示从左边开始删除第一个 // 号及左边的所有字符即删除 http://
+结果是">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -73,7 +82,7 @@
   };
 </script>
 
-  <title>  | cherishry's Blog </title>
+  <title> Shell脚本8种字符串截取方法总结 | cherishry's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -188,7 +197,7 @@
           
           
             
-              
+              Shell脚本8种字符串截取方法总结
             
           
         </h1>
@@ -197,11 +206,26 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2016-03-02T20:24:30+08:00" content="2016-03-02">
-            2016-03-02
+          <time itemprop="dateCreated" datetime="2015-09-03T08:21:10+08:00" content="2015-09-03">
+            2015-09-03
           </time>
         </span>
 
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/shell/" itemprop="url" rel="index">
+                  <span itemprop="name">shell</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
         
 
         
@@ -216,30 +240,89 @@
       
 
       
-        <span itemprop="articleBody"><p>1、最简单的方法，直接使用默认分区，因为是虚拟机，不需要太多设置的。</p>
-<p>2、必须进行的分区方法。Linux的分区必须有两个分区，一个是/根分区，一个是swap交换分区。</p>
-<p>3、较规矩的分区方法，除了必须的/根分区和swap交换分区，一般还要单独分boot分区和home分区。</p>
-<p>/:根分区，至少要8G的空间，当然多多益善。</p>
-<p>/boot:该分区是引导分区，一般在100M~200M即可。</p>
-<p>/swap:交换分区，一般有如下图的原则</p>
-<p>/home分区：如果在Linux虚拟机中经常写代码之类的，建议10G。</p>
-<p>注意：虚拟机和实际的物理机还是有区别的，分区的大小现在电脑都不是问题，因为硬盘现在基本按TB来算。</p>
+        <span itemprop="articleBody"><p>#Shell脚本8种字符串截取方法总结<br>Linux 的字符串截取很有用,有八种方法。</p>
+<p>假设有变量 <code>var=http://www.aaa.com/123.html.</code></p>
+<ul>
+<li><code>#</code> 号截取，删除左边字符，保留右边字符。</li>
+</ul>
+<p>如下:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> $&#123;<span class="keyword">var</span><span class="comment">#*//&#125;</span></span><br></pre></td></tr></table></figure>
+<p>其中 <code>var</code> 是变量名，<code>#</code> 号是运算符，<code>*//</code> 表示从左边开始删除第一个 <code>//</code> 号及左边的所有字符<br>即删除 <code>http://</code></p>
+<p>结果是 ：<code>www.aaa.com/123.html</code></p>
+<ul>
+<li><code>##</code> 号截取，删除左边字符，保留右边字符。</li>
+</ul>
+<p>如下:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> $&#123;<span class="keyword">var</span><span class="comment">##*/&#125;</span></span><br></pre></td></tr></table></figure>
+<p><code>##*/</code> 表示从左边开始,删除最后（最右边）一个 <code>/</code> 号及左边的所有字符<br>即删除 <code>http://www.aaa.com/</code></p>
+<p>结果是: <code>123.html</code></p>
+<ul>
+<li><code>%</code>号截取，删除右边字符，保留左边字符</li>
+</ul>
+<p>如下:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;var%/*&#125;</span></span><br></pre></td></tr></table></figure>
+<p><code>%/*</code> 表示从右边开始，删除第一个<code>/</code> 号及右边的字符</p>
+<p>结果是：<code>http://www.aaa.com</code></p>
+<ul>
+<li><code>%%</code> 号截取，删除右边字符，保留左边字符</li>
+</ul>
+<p>如下:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;var%%/*&#125;</span></span><br></pre></td></tr></table></figure>
+<p><code>%%/*</code> 表示从右边开始，删除最后（最左边）一个 <code>/</code> 号及右边的字符</p>
+<p>结果是：<code>http:</code></p>
+<ul>
+<li>从左边第几个字符开始，及字符的个数</li>
+</ul>
+<p>如下:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;var:0:5&#125;</span></span><br></pre></td></tr></table></figure>
+<p>其中的 <code>0</code> 表示左边第一个字符开始，<code>5</code> 表示字符的总个数。</p>
+<p>结果是：<code>http:</code></p>
+<ul>
+<li>从左边第几个字符开始，一直到结束。</li>
+</ul>
+<p>如下:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;var:7&#125;</span></span><br></pre></td></tr></table></figure>
+<p>其中的 <code>7</code> 表示左边第<code>8</code>个字符开始，一直到结束。</p>
+<p>结果是 ：<code>www.aaa.com/123.html</code></p>
+<ul>
+<li>从右边第几个字符开始，及字符的个数</li>
+</ul>
+<p>如下:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $&#123;var:<span class="number">0</span>-<span class="number">7</span>:<span class="number">3</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>其中的 <code>0-7</code> 表示右边算起第七个字符开始，<code>3</code> 表示字符的个数。</p>
+<p>结果是：<code>123</code></p>
+<ul>
+<li>从右边第几个字符开始，一直到结束。</li>
+</ul>
+<p>如下:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;var:0-7&#125;</span></span><br></pre></td></tr></table></figure>
+<p>表示从右边第七个字符开始，一直到结束。</p>
+<p>结果是：<code>123.html</code></p>
+<p>注：（左边的第一个字符是用 0 表示，右边的第一个字符用 0-1 表示）</p>
 </span>
       
     </div>
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/shell/" rel="tag">#shell</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2015-09-03-用户管理，文件管理，文件权限，sudo权限下放.html" rel="prev">用户管理，文件管理，文件权限，sudo权限下放</a>
+            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016-03-02-有关用户管理的文件内容及其解释(passwd,shadow,login.defs).html" rel="next"></a>
+              <a href="/2015-09-02-linux启动过程详解.html" rel="next">linux启动过程详解</a>
             
           </div>
         </div>
@@ -301,21 +384,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
