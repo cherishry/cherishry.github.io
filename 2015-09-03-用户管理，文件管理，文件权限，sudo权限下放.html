@@ -39,55 +39,49 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="#用户管理，文件管理，文件权限，sudo权限下放
-##账号管理
-切换用户
+<meta name="description" content="用户管理，文件管理，文件权限，sudo权限下放账号管理切换用户
 su student 和 su - student的区别
 前者只是把用户切换到student，但是环境还没有切换到student的环境
 注意：切换用户的时候最好要写su - student
-##用户的管理
-###添加用户
-命令：useradd
+用户的管理添加用户命令：useradd
 部分参数详解：
 
 -u： 指定UID。
 
-1# useradd -u 500 te">
+1# useradd -u 500 test
+
+-g： 指定初始">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用户管理，文件管理，文件权限，sudo权限下放">
 <meta property="og:url" content="http://cherishry.github.io/2015-09-03-用户管理，文件管理，文件权限，sudo权限下放.html">
 <meta property="og:site_name" content="cherishry's Blog">
-<meta property="og:description" content="#用户管理，文件管理，文件权限，sudo权限下放
-##账号管理
-切换用户
+<meta property="og:description" content="用户管理，文件管理，文件权限，sudo权限下放账号管理切换用户
 su student 和 su - student的区别
 前者只是把用户切换到student，但是环境还没有切换到student的环境
 注意：切换用户的时候最好要写su - student
-##用户的管理
-###添加用户
-命令：useradd
+用户的管理添加用户命令：useradd
 部分参数详解：
 
 -u： 指定UID。
 
-1# useradd -u 500 te">
-<meta property="og:updated_time" content="2016-03-03T08:52:47.336Z">
+1# useradd -u 500 test
+
+-g： 指定初始">
+<meta property="og:updated_time" content="2016-03-03T08:57:57.345Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用户管理，文件管理，文件权限，sudo权限下放">
-<meta name="twitter:description" content="#用户管理，文件管理，文件权限，sudo权限下放
-##账号管理
-切换用户
+<meta name="twitter:description" content="用户管理，文件管理，文件权限，sudo权限下放账号管理切换用户
 su student 和 su - student的区别
 前者只是把用户切换到student，但是环境还没有切换到student的环境
 注意：切换用户的时候最好要写su - student
-##用户的管理
-###添加用户
-命令：useradd
+用户的管理添加用户命令：useradd
 部分参数详解：
 
 -u： 指定UID。
 
-1# useradd -u 500 te">
+1# useradd -u 500 test
+
+-g： 指定初始">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -255,15 +249,11 @@ su student 和 su - student的区别
       
 
       
-        <span itemprop="articleBody"><p>#用户管理，文件管理，文件权限，sudo权限下放</p>
-<p>##账号管理</p>
-<p>切换用户</p>
+        <span itemprop="articleBody"><h1 id="用户管理，文件管理，文件权限，sudo权限下放">用户管理，文件管理，文件权限，sudo权限下放</h1><h2 id="账号管理">账号管理</h2><p>切换用户</p>
 <p><code>su student</code> 和 <code>su - student</code>的区别</p>
 <p>前者只是把用户切换到<code>student</code>，但是环境还没有切换到<code>student</code>的环境</p>
 <p>注意：切换用户的时候最好要写<code>su - student</code></p>
-<p>##用户的管理</p>
-<p>###添加用户</p>
-<p>命令：<code>useradd</code></p>
+<h2 id="用户的管理">用户的管理</h2><h3 id="添加用户">添加用户</h3><p>命令：<code>useradd</code></p>
 <p>部分参数详解：</p>
 <ul>
 <li>-u： 指定UID。</li>
@@ -301,16 +291,14 @@ su student 和 su - student的区别
 </ul>
 <p>禁止用户的交互行为使用<code>/sbin/nologin</code>，即其他用户不能<code>su -</code>此用户</p>
 <figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># useradd -s /sbin/nologin test</span></span><br></pre></td></tr></table></figure>
-<p>###删除用户</p>
-<p>命令：<code>userdel</code></p>
+<h3 id="删除用户">删除用户</h3><p>命令：<code>userdel</code></p>
 <p>主要参数：</p>
 <ul>
 <li>-r：在删除用户时，将用户的家目录及家目录里面的文件，以及邮件池都删除。</li>
 </ul>
 <p><strong>如果</strong>不加<code>-r</code>,<code>/etc/passwd /etc/group</code>会发生相应变化，但是用户所对应的家目录不会被删除，当下次再创建此用户的时候，就会报错，<code>home directory</code>和<code>mailbox file</code>已经存在。</p>
 <p><strong>但是</strong>报错也不怕，我们只要手动的去删除此用户的家目录和对应的邮件池就好啦！</p>
-<p>###修改用户</p>
-<p>命令：<code>usermod</code></p>
+<h3 id="修改用户">修改用户</h3><p>命令：<code>usermod</code></p>
 <p>部分参数：</p>
 <ul>
 <li><p>注：usermod的常用参数和useradd相似，前面学习过的，这里不再详解</p>
@@ -318,39 +306,31 @@ su student 和 su - student的区别
 <li><p>-L：冻结用户（锁住），操作文件<code>/etc/shadow</code>。是在第二列即密码那一列前面加了一个<code>!</code>。只是让密码失效了，没有让用户失效。（前提：已经给过用户密码，否则一直都是两个感叹号）</p>
 </li>
 </ul>
-<p>###手动建立用户</p>
-<ol>
+<h3 id="手动建立用户">手动建立用户</h3><ol>
 <li><code>useradd test</code></li>
 <li><code>passwd test</code>    #若不给密码，则不能切换至此用户</li>
 </ol>
 <p>注：此时你会发现<code>/etc/shadow</code>里面用户的第二个字段发生了变化。现在就可以登录啦！</p>
 <p><strong>【注意】</strong></p>
 <p>如果是使用修改<code>/etc/passwd</code>来添加用户，以及修改<code>/etc/group /etc/shadow</code>等，还得在home下创建家目录，最后，把<code>/etc/skel</code>的1所有文件拷贝到家目录下。这样bash的命令提示符才正常。</p>
-<p>##组的管理</p>
-<p>###创建组</p>
-<p>命令：<code>groupadd</code></p>
+<h2 id="组的管理">组的管理</h2><h3 id="创建组">创建组</h3><p>命令：<code>groupadd</code></p>
 <p>常用参数：</p>
 <ul>
 <li><p>-g：指定组号</p>
 <pre><code>groupadd -<span class="keyword">g</span> 2000 <span class="keyword">test</span>
 </code></pre></li>
 </ul>
-<p>###修改组</p>
-<p>命令：<code>groupmod</code></p>
+<h3 id="修改组">修改组</h3><p>命令：<code>groupmod</code></p>
 <p>常用参数：</p>
 <ul>
 <li>-g：修改组号</li>
 </ul>
 <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupmod -<span class="keyword">g</span> 3000 <span class="keyword">test</span></span><br></pre></td></tr></table></figure>
-<p>###删除组</p>
-<p>命令：<code>groupdel</code></p>
+<h3 id="删除组">删除组</h3><p>命令：<code>groupdel</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupdel <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
-<p>##文件管理</p>
-<p>###创建文件</p>
-<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">touch filename</span><br><span class="line"><span class="keyword">mkdir</span> dirname	<span class="comment">#创建目录</span></span><br></pre></td></tr></table></figure>
+<h2 id="文件管理">文件管理</h2><h3 id="创建文件">创建文件</h3><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">touch filename</span><br><span class="line"><span class="keyword">mkdir</span> dirname	<span class="comment">#创建目录</span></span><br></pre></td></tr></table></figure>
 <p>使用vi/vim编译器，编译完之后保存</p>
-<p>###修改文件</p>
-<ul>
+<h3 id="修改文件">修改文件</h3><ul>
 <li><p>修改文件（目录）名字</p>
 <pre><code><span class="title">mv</span> oldname newname
 </code></pre></li>
@@ -358,14 +338,11 @@ su student 和 su - student的区别
 <pre><code><span class="title">mv</span> oldpath newpath
 </code></pre></li>
 </ul>
-<p>###删除文件</p>
-<pre><code>rm -fr filename/<span class="keyword">dirname</span>
-</code></pre><p>###监控文件</p>
-<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">watch tail <span class="keyword">filename</span></span><br><span class="line">tail -f <span class="keyword">filename</span></span><br></pre></td></tr></table></figure>
+<h3 id="删除文件">删除文件</h3><pre><code>rm -fr filename/<span class="keyword">dirname</span>
+</code></pre><h3 id="监控文件">监控文件</h3><figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">watch tail <span class="keyword">filename</span></span><br><span class="line">tail -f <span class="keyword">filename</span></span><br></pre></td></tr></table></figure>
 <p>eg.</p>
 <figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">watch tail /etc/<span class="keyword">group</span></span><br><span class="line">tail -f /etc/<span class="keyword">group</span></span><br></pre></td></tr></table></figure>
-<p>###更改文件的拥有者和组</p>
-<p><code>ls -lR /mnt/</code>递归显示<code>/mnt</code>里面的内容</p>
+<h3 id="更改文件的拥有者和组">更改文件的拥有者和组</h3><p><code>ls -lR /mnt/</code>递归显示<code>/mnt</code>里面的内容</p>
 <ul>
 <li>更改文件的所属人<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown owner filename/<span class="keyword">dirname</span></span><br></pre></td></tr></table></figure>
 </li>
@@ -384,9 +361,7 @@ su student 和 su - student的区别
 <figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chown owner.<span class="keyword">group</span> filename/<span class="keyword">dirname</span></span><br><span class="line">或者</span><br><span class="line">chown owner:<span class="keyword">group</span> fielname/<span class="keyword">dirname</span></span><br></pre></td></tr></table></figure>
 <p>eg.</p>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chown haha.haha <span class="regexp">/mnt/</span>test</span><br><span class="line">chown <span class="string">haha:</span>haha <span class="regexp">/mnt/</span>test</span><br></pre></td></tr></table></figure>
-<p>###文件权限的管理</p>
-<p>####基本权限</p>
-<table>
+<h3 id="文件权限的管理">文件权限的管理</h3><h4 id="基本权限">基本权限</h4><table>
 <thead>
 <tr>
 <th>u</th>
@@ -425,8 +400,7 @@ su student 和 su - student的区别
 </table>
 <p>eg.</p>
 <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">chmod ugo-rwx <span class="keyword">file</span>			<span class="comment">//000</span></span><br><span class="line">chmod <span class="keyword">u</span>+rw,<span class="keyword">g</span>+rw,o+r <span class="keyword">file</span>	</span><br><span class="line">chmod -r <span class="keyword">file</span>				<span class="comment">//等同于ugo-r</span></span><br><span class="line">chmod go-r <span class="keyword">file</span></span><br><span class="line">chmod 754 <span class="keyword">file</span>				<span class="comment">//rwxr-wr--</span></span><br><span class="line">chmod 755 /mnt/<span class="keyword">test</span> -R		<span class="comment">//递归式的更改目录权限</span></span><br></pre></td></tr></table></figure>
-<p>####特殊权限</p>
-<h5 id="特殊权限详解">特殊权限详解</h5><p><strong>Set uid, gid,sticky bit</strong></p>
+<h4 id="特殊权限">特殊权限</h4><h5 id="特殊权限详解">特殊权限详解</h5><p><strong>Set uid, gid,sticky bit</strong></p>
 <p>一个文件都有一个所有者, 表示该文件是谁创建的. 同时, 该文件还有一个组编号, 表示该文件所属的组, 一般为文件所有者所属的组.</p>
 <p>如果是一个可执行文件, 那么在执行时, 一般该文件只拥有调用该文件的用户具有的权限. 而<code>setuid</code>, <code>setgid</code> 可以来改变这种设置.</p>
 <p><code>setuid</code>: 设置使文件在执行阶段具有文件所有者的权限. 典型的文件是 <code>/usr/bin/passwd</code>. 如果一般用户执行该文件, 则在执行过程中, 该文件可以获得<code>root</code>权<br>限, 从而可以更改用户的密码.</p>
@@ -479,8 +453,7 @@ su student 和 su - student的区别
 </li>
 </ul>
 <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">0</span>: <span class="string">不设置特殊权限 </span></span><br><span class="line"><span class="attribute">1</span>: <span class="string">只设置sticky </span></span><br><span class="line"><span class="attribute">2</span>: <span class="string">只设置SGID </span></span><br><span class="line"><span class="attribute">3</span>: <span class="string">只设置SGID和sticky </span></span><br><span class="line"><span class="attribute">4</span>: <span class="string">只设置SUID </span></span><br><span class="line"><span class="attribute">5</span>: <span class="string">只设置SUID和sticky </span></span><br><span class="line"><span class="attribute">6</span>: <span class="string">只设置SUID和SGID </span></span><br><span class="line"><span class="attribute">7</span>: <span class="string">设置3种权限</span></span><br></pre></td></tr></table></figure>
-<p>##红帽的安全umask</p>
-<p>umask:权限的<strong>补码</strong>，文件，目录的<strong>默认</strong>权限，称之为<strong>权限掩码</strong></p>
+<h2 id="红帽的安全umask">红帽的安全umask</h2><p>umask:权限的<strong>补码</strong>，文件，目录的<strong>默认</strong>权限，称之为<strong>权限掩码</strong></p>
 <p>新建目录的默认权限是<code>umask 022  drwxr_xr_x</code></p>
 <p>新建文件会在上面的基础上再减去一个<code>111 -rw-r--r-- 644</code></p>
 <p>病毒是一个文件，下载到你的电脑以后，内核会自动把文件的可执行权限去掉，即去掉所有的x</p>
@@ -498,8 +471,7 @@ su student 和 su - student的区别
 <p>新建目录权限777-022=755,新建文件权限755-111=644</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@rhel7 test]<span class="preprocessor"># umask</span></span><br><span class="line"><span class="number">0022</span></span><br><span class="line">[root@rhel7 test]<span class="preprocessor"># mkdir dir</span></span><br><span class="line">[root@rhel7 test]<span class="preprocessor"># touch file</span></span><br><span class="line">[root@rhel7 test]<span class="preprocessor"># ll</span></span><br><span class="line">total <span class="number">0</span></span><br><span class="line">drwxr-xr-x. <span class="number">2</span> root root <span class="number">6</span> Jan <span class="number">24</span> <span class="number">22</span>:<span class="number">30</span> dir</span><br><span class="line">-rw-r--r--. <span class="number">1</span> root root <span class="number">0</span> Jan <span class="number">24</span> <span class="number">22</span>:<span class="number">30</span> file</span><br></pre></td></tr></table></figure>
 <p>【注】若要修改<code>umask</code>，在上面提到的三个文件中直接修改，然后使用<code>source</code>命令使之生效。</p>
-<p>##root用sudo下放权限</p>
-<p>系统中有些命令只能用<code>root</code>身份执行，普通用户不能执行。如果想让普通用户以<code>root</code>身份来执行某些命令，可以用sudo来声明，所执行的命令是root下放的</p>
+<h2 id="root用sudo下放权限">root用sudo下放权限</h2><p>系统中有些命令只能用<code>root</code>身份执行，普通用户不能执行。如果想让普通用户以<code>root</code>身份来执行某些命令，可以用sudo来声明，所执行的命令是root下放的</p>
 <p>eg.</p>
 <p>virt-manager只有超级用户才可以执行成功</p>
 <figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[lala<span class="variable">@rhel7</span> ~]<span class="variable">$ </span>virt-manager</span><br></pre></td></tr></table></figure>
@@ -515,9 +487,7 @@ su student 和 su - student的区别
 <p><strong>第三步</strong>：lala就可以用root身份执行那条命令了</p>
 <figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[lala<span class="variable">@rhel7</span> ~]<span class="variable">$ </span>sudo virt-manager</span><br></pre></td></tr></table></figure>
 <p>【注】：如果想要撤销授权的话将<code>/etc/sudoers</code>里面加的那句删除（或注释）掉就好啦</p>
-<p>##补充</p>
-<p>###本节课用到命令</p>
-<ul>
+<h2 id="补充">补充</h2><h3 id="本节课用到命令">本节课用到命令</h3><ul>
 <li>which</li>
 </ul>
 <p>查看命令的绝对路径</p>
@@ -661,7 +631,7 @@ su student 和 su - student的区别
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#特殊权限详解"><span class="nav-number">1.</span> <span class="nav-text">特殊权限详解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#常用操作"><span class="nav-number">2.</span> <span class="nav-text">常用操作</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#用户管理，文件管理，文件权限，sudo权限下放"><span class="nav-number">1.</span> <span class="nav-text">用户管理，文件管理，文件权限，sudo权限下放</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#账号管理"><span class="nav-number">1.1.</span> <span class="nav-text">账号管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户的管理"><span class="nav-number">1.2.</span> <span class="nav-text">用户的管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加用户"><span class="nav-number">1.2.1.</span> <span class="nav-text">添加用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除用户"><span class="nav-number">1.2.2.</span> <span class="nav-text">删除用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改用户"><span class="nav-number">1.2.3.</span> <span class="nav-text">修改用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#手动建立用户"><span class="nav-number">1.2.4.</span> <span class="nav-text">手动建立用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组的管理"><span class="nav-number">1.3.</span> <span class="nav-text">组的管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建组"><span class="nav-number">1.3.1.</span> <span class="nav-text">创建组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改组"><span class="nav-number">1.3.2.</span> <span class="nav-text">修改组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除组"><span class="nav-number">1.3.3.</span> <span class="nav-text">删除组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件管理"><span class="nav-number">1.4.</span> <span class="nav-text">文件管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建文件"><span class="nav-number">1.4.1.</span> <span class="nav-text">创建文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改文件"><span class="nav-number">1.4.2.</span> <span class="nav-text">修改文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除文件"><span class="nav-number">1.4.3.</span> <span class="nav-text">删除文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#监控文件"><span class="nav-number">1.4.4.</span> <span class="nav-text">监控文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更改文件的拥有者和组"><span class="nav-number">1.4.5.</span> <span class="nav-text">更改文件的拥有者和组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件权限的管理"><span class="nav-number">1.4.6.</span> <span class="nav-text">文件权限的管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本权限"><span class="nav-number">1.4.6.1.</span> <span class="nav-text">基本权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特殊权限"><span class="nav-number">1.4.6.2.</span> <span class="nav-text">特殊权限</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#特殊权限详解"><span class="nav-number">1.4.6.2.1.</span> <span class="nav-text">特殊权限详解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#常用操作"><span class="nav-number">1.4.6.2.2.</span> <span class="nav-text">常用操作</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#红帽的安全umask"><span class="nav-number">1.5.</span> <span class="nav-text">红帽的安全umask</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#root用sudo下放权限"><span class="nav-number">1.6.</span> <span class="nav-text">root用sudo下放权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充"><span class="nav-number">1.7.</span> <span class="nav-text">补充</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本节课用到命令"><span class="nav-number">1.7.1.</span> <span class="nav-text">本节课用到命令</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
