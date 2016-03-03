@@ -30,7 +30,7 @@
 
 
 
-  <meta name="keywords" content="linux,lvs," />
+  <meta name="keywords" content="linux,lvs,负载均衡," />
 
 
 
@@ -39,28 +39,14 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="title:LVS在淘宝环境中的应用date: 2015-01-16 12:12:23tags:
-
-linux
-lvs
-负载均衡categories: [linux-集群]
-
-
-参考文献：阿里lvs.pdf-小敏的PPT私家菜谱参考博客：blog.aliyun.com
-个人简介吴佳明_普空——核心系统研发一直从事系统网络相关技术研发,包括 IDC网络、内核TCP/IP协议、4/7层负载均衡、CDN">
+<meta name="description" content="参考文献：阿里lvs.pdf-小敏的PPT私家菜谱参考博客：blog.aliyun.com
+个人简介吴佳明_普空——核心系统研发一直从事系统网络相关技术研发,包括 IDC网络、内核TCP/IP协议、4/7层负载均衡、CDN、DDOS攻击防御等;• 2007.4~2011.5 就职亍 百度,资深系统工程师,完成 百度网络4层统一接入和接出;• 2011.5~至今 就职亍 淘宝,技术专家,从事LVS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LVS在淘宝环境中的应用">
-<meta property="og:url" content="http://cherishry.github.io/2016-01-15-LVS在淘宝环境中的应用.html">
+<meta property="og:url" content="http://cherishry.github.io/2016-01-16-LVS在淘宝环境中的应用.html">
 <meta property="og:site_name" content="cherishry's Blog">
-<meta property="og:description" content="title:LVS在淘宝环境中的应用date: 2015-01-16 12:12:23tags:
-
-linux
-lvs
-负载均衡categories: [linux-集群]
-
-
-参考文献：阿里lvs.pdf-小敏的PPT私家菜谱参考博客：blog.aliyun.com
-个人简介吴佳明_普空——核心系统研发一直从事系统网络相关技术研发,包括 IDC网络、内核TCP/IP协议、4/7层负载均衡、CDN">
+<meta property="og:description" content="参考文献：阿里lvs.pdf-小敏的PPT私家菜谱参考博客：blog.aliyun.com
+个人简介吴佳明_普空——核心系统研发一直从事系统网络相关技术研发,包括 IDC网络、内核TCP/IP协议、4/7层负载均衡、CDN、DDOS攻击防御等;• 2007.4~2011.5 就职亍 百度,资深系统工程师,完成 百度网络4层统一接入和接出;• 2011.5~至今 就职亍 淘宝,技术专家,从事LVS">
 <meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/23-24-01.jpg">
 <meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/23-25-33.jpg">
 <meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/23-28-29.jpg">
@@ -84,18 +70,11 @@ lvs
 <meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/00-10-42.jpg">
 <meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/00-10-58.jpg">
 <meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/00-12-08.jpg">
-<meta property="og:updated_time" content="2016-03-03T11:02:34.726Z">
+<meta property="og:updated_time" content="2016-03-03T11:30:22.049Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LVS在淘宝环境中的应用">
-<meta name="twitter:description" content="title:LVS在淘宝环境中的应用date: 2015-01-16 12:12:23tags:
-
-linux
-lvs
-负载均衡categories: [linux-集群]
-
-
-参考文献：阿里lvs.pdf-小敏的PPT私家菜谱参考博客：blog.aliyun.com
-个人简介吴佳明_普空——核心系统研发一直从事系统网络相关技术研发,包括 IDC网络、内核TCP/IP协议、4/7层负载均衡、CDN">
+<meta name="twitter:description" content="参考文献：阿里lvs.pdf-小敏的PPT私家菜谱参考博客：blog.aliyun.com
+个人简介吴佳明_普空——核心系统研发一直从事系统网络相关技术研发,包括 IDC网络、内核TCP/IP协议、4/7层负载均衡、CDN、DDOS攻击防御等;• 2007.4~2011.5 就职亍 百度,资深系统工程师,完成 百度网络4层统一接入和接出;• 2011.5~至今 就职亍 淘宝,技术专家,从事LVS">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -229,8 +208,8 @@ lvs
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2016-01-15T08:32:00+08:00" content="2016-01-15">
-            2016-01-15
+          <time itemprop="dateCreated" datetime="2016-01-16T12:12:23+08:00" content="2016-01-16">
+            2016-01-16
           </time>
         </span>
 
@@ -239,8 +218,8 @@ lvs
             &nbsp; | &nbsp; 分类于
             
               <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/linux/" itemprop="url" rel="index">
-                  <span itemprop="name">linux</span>
+                <a href="/categories/linux-集群/" itemprop="url" rel="index">
+                  <span itemprop="name">linux-集群</span>
                 </a>
               </span>
 
@@ -263,14 +242,7 @@ lvs
       
 
       
-        <span itemprop="articleBody"><p>title:LVS在淘宝环境中的应用<br>date: 2015-01-16 12:12:23<br>tags:</p>
-<ul>
-<li>linux</li>
-<li>lvs</li>
-<li>负载均衡<br>categories: [linux-集群]</li>
-</ul>
-<hr>
-<p>参考文献：阿里lvs.pdf-小敏的PPT私家菜谱<br>参考博客：<a href="http://blog.aliyun.com/1750" target="_blank" rel="external">blog.aliyun.com</a></p>
+        <span itemprop="articleBody"><p>参考文献：阿里lvs.pdf-小敏的PPT私家菜谱<br>参考博客：<a href="http://blog.aliyun.com/1750" target="_blank" rel="external">blog.aliyun.com</a></p>
 <h2 id="个人简介">个人简介</h2><p>吴佳明_普空——核心系统研发<br>一直从事系统网络相关技术研发,包括 IDC<br>网络、内核TCP/IP协议、4/7层负载均衡、<br>CDN、DDOS攻击防御等;<br>• 2007.4~2011.5 就职亍 百度,资深系统工程<br>师,完成 百度网络4层统一接入和接出;<br>• 2011.5~至今 就职亍 淘宝,技术专家,从事<br>LVS 等网络技术研发;</p>
 <h2 id="主要内容">主要内容</h2><ol>
 <li>LVS-简介</li>
@@ -338,6 +310,8 @@ lvs
           
             <a href="/tags/lvs/" rel="tag">#lvs</a>
           
+            <a href="/tags/负载均衡/" rel="tag">#负载均衡</a>
+          
         </div>
       
 
@@ -345,13 +319,13 @@ lvs
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016-02-28-linux下的快捷键.html" rel="prev">linux下的快捷键</a>
+              <a href="/2016-01-17-keepalived+lvs.html" rel="prev">keepalived.conf文件参数说明</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015-09-18-一个存放在内存中的特殊目录 (proc).html" rel="next">一个存放内存中的特殊目录/proc</a>
+              <a href="/2016-01-16-heartbeat+lvs,给lvs 添加健康监测.html" rel="next">heartbeat与lvs结合来给lvs 添加健康监测</a>
             
           </div>
         </div>
@@ -413,21 +387,21 @@ lvs
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">19</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">6</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-count">30</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

@@ -174,7 +174,7 @@
           
           
             
-              <a class="post-title-link" href="/2016-02-29-keepalived.conf文件参数说明.html" itemprop="url">
+              <a class="post-title-link" href="/2016-01-17-keepalived.conf文件参数说明.html" itemprop="url">
                 keepalived.conf文件参数说明
               </a>
             
@@ -185,11 +185,26 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2016-02-29T00:41:00+08:00" content="2016-02-29">
-            2016-02-29
+          <time itemprop="dateCreated" datetime="2016-01-17T14:25:32+08:00" content="2016-01-17">
+            2016-01-17
           </time>
         </span>
 
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/linux-集群/" itemprop="url" rel="index">
+                  <span itemprop="name">linux-集群</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
         
 
         
@@ -207,17 +222,11 @@
         
           <span itemprop="articleBody">
             
-            title:keepalived.conf文件参数说明date: 2015-01-20 14:25:32tags:
-
-linux
-keepalivedcategories: [linux-集群]
-
-
-```global_defs {   notification_email {  #指定keepal
+            ```global_defs {   notification_email {  #指定keepalived在发生切换时需要发送email到的对象，一行一个    sysadmin@fire.loc   }   notification_email_from Alexandre.Cassen@fir
             ...
           </span>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016-02-29-keepalived.conf文件参数说明.html#more" rel="contents">
+            <a class="btn" href="/2016-01-17-keepalived.conf文件参数说明.html#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -250,8 +259,8 @@ keepalivedcategories: [linux-集群]
           
           
             
-              <a class="post-title-link" href="/2016-02-28-linux下的快捷键.html" itemprop="url">
-                linux下的快捷键
+              <a class="post-title-link" href="/2016-01-17-keepalived+lvs.html" itemprop="url">
+                keepalived.conf文件参数说明
               </a>
             
           
@@ -261,11 +270,26 @@ keepalivedcategories: [linux-集群]
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2016-02-28T20:43:00+08:00" content="2016-02-28">
-            2016-02-28
+          <time itemprop="dateCreated" datetime="2016-01-17T09:42:15+08:00" content="2016-01-17">
+            2016-01-17
           </time>
         </span>
 
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/linux-集群/" itemprop="url" rel="index">
+                  <span itemprop="name">linux-集群</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
         
 
         
@@ -283,18 +307,12 @@ keepalivedcategories: [linux-集群]
         
           <span itemprop="articleBody">
             
-            title:keepalived.conf文件参数说明date: 2015-10-24 15:25:32tags:
-
-linux
-快捷键categories: [linux]
-
-
-GNOME下也是Alt+F2，输入gnome-terminal如果桌面有terminal 的话 ，直接用上下键就可以了
-
+            #keepalived+lvs(为lvs提供健康检查)【注】：所有实验机的防火墙和sellinux都要关闭
+##keepalived+lvs+httpd调度端(keepalived)：server1（172.25.9.1） server2(172.25.9.2)real server:server3
             ...
           </span>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016-02-28-linux下的快捷键.html#more" rel="contents">
+            <a class="btn" href="/2016-01-17-keepalived+lvs.html#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -327,7 +345,7 @@ GNOME下也是Alt+F2，输入gnome-terminal如果桌面有terminal 的话 ，直
           
           
             
-              <a class="post-title-link" href="/2016-01-15-LVS在淘宝环境中的应用.html" itemprop="url">
+              <a class="post-title-link" href="/2016-01-16-LVS在淘宝环境中的应用.html" itemprop="url">
                 LVS在淘宝环境中的应用
               </a>
             
@@ -338,7 +356,179 @@ GNOME下也是Alt+F2，输入gnome-terminal如果桌面有terminal 的话 ，直
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2016-01-15T08:32:00+08:00" content="2016-01-15">
+          <time itemprop="dateCreated" datetime="2016-01-16T12:12:23+08:00" content="2016-01-16">
+            2016-01-16
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/linux-集群/" itemprop="url" rel="index">
+                  <span itemprop="name">linux-集群</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+            参考文献：阿里lvs.pdf-小敏的PPT私家菜谱参考博客：blog.aliyun.com
+个人简介吴佳明_普空——核心系统研发一直从事系统网络相关技术研发,包括 IDC网络、内核TCP/IP协议、4/7层负载均衡、CDN、DDOS攻击防御等;• 2007.4~2011.5 就职亍 百度,资深系统工
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016-01-16-LVS在淘宝环境中的应用.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2016-01-16-heartbeat+lvs,给lvs 添加健康监测.html" itemprop="url">
+                heartbeat与lvs结合来给lvs 添加健康监测
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-01-16T09:51:23+08:00" content="2016-01-16">
+            2016-01-16
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/linux-集群/" itemprop="url" rel="index">
+                  <span itemprop="name">linux-集群</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+            heartbeat与lvs结合来给lvs 添加健康监测
+简述作用：之前我们只是单纯的部署了lvs，实现了负载均衡，但是lvs有一个缺点，假如说RS中的其中一个down掉了，那么访问就会出现异常，lvs只是使用算法去调度这些RS，但是并没有检测RS是否健康的功能，所以我们要请心跳HA来帮忙，让我们的部
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016-01-16-heartbeat+lvs,给lvs 添加健康监测.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2016-01-15-LVS 的负载调度算法 .html" itemprop="url">
+                LVS 的负载调度算法
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-01-15T17:12:43+08:00" content="2016-01-15">
             2016-01-15
           </time>
         </span>
@@ -348,8 +538,8 @@ GNOME下也是Alt+F2，输入gnome-terminal如果桌面有terminal 的话 ，直
             &nbsp; | &nbsp; 分类于
             
               <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/linux/" itemprop="url" rel="index">
-                  <span itemprop="name">linux</span>
+                <a href="/categories/linux-集群/" itemprop="url" rel="index">
+                  <span itemprop="name">linux-集群</span>
                 </a>
               </span>
 
@@ -375,19 +565,12 @@ GNOME下也是Alt+F2，输入gnome-terminal如果桌面有terminal 的话 ，直
         
           <span itemprop="articleBody">
             
-            title:LVS在淘宝环境中的应用date: 2015-01-16 12:12:23tags:
-
-linux
-lvs
-负载均衡categories: [linux-集群]
-
-
-参考文献：阿里lvs.pdf-小敏的PPT私家菜谱参考博客：blog.aliyun.com
-个人简介吴佳明_普空——核心系
+            LVS 的负载调度算法在内核中的连接调度算法上,IPVS 已实现了以下八种调度算法:
+轮叫调度(Round-Robin Scheduling)RR轮叫调度(Round Robin Scheduling)算法就是以轮叫的方式依次将请求调度不同的服务器,即每次调度执行 i = (i + 1) mod n
             ...
           </span>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016-01-15-LVS在淘宝环境中的应用.html#more" rel="contents">
+            <a class="btn" href="/2016-01-15-LVS 的负载调度算法 .html#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -420,8 +603,8 @@ lvs
           
           
             
-              <a class="post-title-link" href="/2015-09-18-一个存放在内存中的特殊目录 (proc).html" itemprop="url">
-                一个存放内存中的特殊目录/proc
+              <a class="post-title-link" href="/2016-01-15-关于lvs（概念，类型，组成结构，调度算法，工作模式，ipvsadm命令）.html" itemprop="url">
+                关于lvs（概念，类型，组成结构，调度算法，工作模式，ipvsadm命令）
               </a>
             
           
@@ -431,8 +614,349 @@ lvs
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-09-18T16:03:32+08:00" content="2015-09-18">
-            2015-09-18
+          <time itemprop="dateCreated" datetime="2016-01-15T10:15:51+08:00" content="2016-01-15">
+            2016-01-15
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/linux-集群/" itemprop="url" rel="index">
+                  <span itemprop="name">linux-集群</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+            关于lvs（概念，类型，组成结构，调度算法，工作模式，ipvsadm命令）LVS概念LVS（Linux Virtual Server）：Linux 虚拟服务器
+LVS是个负载均衡设备，它不提供任何服务，用户请求到这里的时候，它是将客户需求转发至后端真正提供服务的服务，所以说后端的服务称作real s
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016-01-15-关于lvs（概念，类型，组成结构，调度算法，工作模式，ipvsadm命令）.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2016-01-14-使用lvs（linux virtual serevr）做负载均衡.html" itemprop="url">
+                使用lvs（linux virtual serevr）做负载均衡
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-01-14T15:12:41+08:00" content="2016-01-14">
+            2016-01-14
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/linux-集群/" itemprop="url" rel="index">
+                  <span itemprop="name">linux-集群</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+            使用lvs（linux virtual serevr）做负载均衡负载均衡：指对系统中的负载情况进行动态调整，以尽量消除或减少系统中各节点负载不均衡的现象。从而提高系统的吞吐量。12调度器：srever1.example.comReal server: server2.example.com	serv
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016-01-14-使用lvs（linux virtual serevr）做负载均衡.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2016-01-12-DM多路径存储.html" itemprop="url">
+                DM多路径存储
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-01-12T15:12:41+08:00" content="2016-01-12">
+            2016-01-12
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/linux-DM/" itemprop="url" rel="index">
+                  <span itemprop="name">linux-DM</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+            DM多路径存储1.在server1上添加一个网卡eth2，并做如下设置:1234567[root@server1 ~]# cat /etc/sysconfig/network-scripts/ifcfg-eth2DEVICE="eth2"BOOTPROTO="none"ONBOOT="yes"IPA
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016-01-12-DM多路径存储.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2016-01-12-DRBD.html" itemprop="url">
+                HA-DRBD
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-01-12T15:12:41+08:00" content="2016-01-12">
+            2016-01-12
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/linux-存储/" itemprop="url" rel="index">
+                  <span itemprop="name">linux-存储</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+            HA-DRBDDRBD(Distributed Replicated Block Device),DRBD 号称是 “网络 RAID”,开源软件,由LINBIT 公司开发。DRBD实际上是一种块设备的实现,主要被用于Linux平台下的高可用(HA)方案之中。他有内核模块和相关程序而组成,通过网络通信
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016-01-12-DRBD.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015-09-24-linux下的快捷键.html" itemprop="url">
+                linux下的快捷键
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-09-24T15:25:32+08:00" content="2015-09-24">
+            2015-09-24
           </time>
         </span>
 
@@ -468,546 +992,13 @@ lvs
         
           <span itemprop="articleBody">
             
-            一个存放内存中的特殊目录/proc这个目录比较特殊，并不在我们磁盘上，而在我们的内存当中；当前系统运行的所有进程都动态的存放在这个目录中。
-12345678910111213141516171819[root@foundation187 proc]# lltotal 0dr-xr-xr-x  8 r
+            GNOME下也是Alt+F2，输入gnome-terminal如果桌面有terminal 的话 ，直接用上下键就可以了
+Alt + F1 类似Windows下的Win键，在GNOME中打开”应用程序”菜单(Applications)
+Alt + F2 类似Windows下的Win + R组合键，在G
             ...
           </span>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015-09-18-一个存放在内存中的特殊目录 (proc).html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015-09-17-进程管理.html" itemprop="url">
-                进程管理
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-09-17T14:03:31+08:00" content="2015-09-17">
-            2015-09-17
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/linux/" itemprop="url" rel="index">
-                  <span itemprop="name">linux</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            进程管理进程的简单了解进程和程序的区别
-程序是静态概念，本身作为一种软件资源长期保存；而进程是程序的执行过程，是动态概念，有一定的生命期，是动态产生和消亡的。
-
-程序和进程无一一对应关系，一个程序可以由多个时程公用；另一方面，一个进程在活动中有可顺序地执行若干程序。
-
-
-父子进程的关系
-子进程是由一
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015-09-17-进程管理.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015-09-15-网络守护进程服务程序--xinetd的详解.html" itemprop="url">
-                网络守护进程服务程序--xinetd的详解
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-09-15T13:22:13+08:00" content="2015-09-15">
-            2015-09-15
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/linux/" itemprop="url" rel="index">
-                  <span itemprop="name">linux</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            网络守护进程服务程序–xinetd的详解xinetd的概念Xinetd是新一代的网络守护进程服务程序，又叫超级internet服务器，常用来管理多种轻量级internet服务。
-Xinted提供类似于inetd+tcp_wrapper的功能，但是更加强大和安全。
-xinetd的特色1）强大的存取控制
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015-09-15-网络守护进程服务程序--xinetd的详解.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015-09-15-htop.html" itemprop="url">
-                Linux下取代top的进程管理工具 htop
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-09-15T12:21:19+08:00" content="2015-09-15">
-            2015-09-15
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/linux/" itemprop="url" rel="index">
-                  <span itemprop="name">linux</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            Linux下取代top的进程管理工具 htophtop 简介htop 是Linux系统中的一个互动的进程查看器，一个文本模式的应用程序(在控制台或者X终端中)，需要ncurses。
-与Linux传统的top相比，htop更加人性化。它可让用户交互式操作，支持颜色主题，可横向或纵向滚动浏览进程列表，并
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015-09-15-htop.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015-09-04-服务管理.html" itemprop="url">
-                服务管理
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-09-04T15:03:31+08:00" content="2015-09-04">
-            2015-09-04
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/linux/" itemprop="url" rel="index">
-                  <span itemprop="name">linux</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            服务管理服务的介绍在开始介绍如何管理Linux的服务前，先为你介绍Linux的服务究竟有哪些。这些服务的分类方法，以及一些关于服务的基本概念
-服务的种类Linux提供了许多的服务。这些服务，可以使依照其功能和依照服务启动的方法与执行时的特性进行分类。
-依照功能分类：
-
-系统服务
-
-— 某些服务的服务
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015-09-04-服务管理.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015-09-04-有关用户管理的文件内容及其解释(passwd,shadow,login.defs).html" itemprop="url">
-                有关用户管理的文件内容及其解释
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-09-04T10:03:15+08:00" content="2015-09-04">
-            2015-09-04
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/linux/" itemprop="url" rel="index">
-                  <span itemprop="name">linux</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            有关用户管理的文件内容及其解释(/etc/passwd,/etc/shadow,/etc/login.defs)/etc/passwd 本地用户信息默认情况下，/etc/passwd 存储有关本地用户的信息
-/etc/passwd 采用以下格式：
-
- 1）username——-UID到名称的一种映射
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015-09-04-有关用户管理的文件内容及其解释(passwd,shadow,login.defs).html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015-09-03-用户管理，文件管理，文件权限，sudo权限下放.html" itemprop="url">
-                用户管理，文件管理，文件权限，sudo权限下放
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-09-03T09:34:52+08:00" content="2015-09-03">
-            2015-09-03
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/linux/" itemprop="url" rel="index">
-                  <span itemprop="name">linux</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            用户管理，文件管理，文件权限，sudo权限下放账号管理切换用户
-su student 和 su - student的区别
-前者只是把用户切换到student，但是环境还没有切换到student的环境
-注意：切换用户的时候最好要写su - student
-用户的管理添加用户命令：useradd
-部分参
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015-09-03-用户管理，文件管理，文件权限，sudo权限下放.html#more" rel="contents">
+            <a class="btn" href="/2015-09-24-linux下的快捷键.html#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1067,21 +1058,21 @@ su student 和 su - student的区别
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">19</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">6</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-count">30</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
