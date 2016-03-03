@@ -1,0 +1,626 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="勿忘初心，方得始终" />
+
+
+
+  <meta name="keywords" content="Hexo,next" />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="title:LVS在淘宝环境中的应用date: 2015-01-18 17:12:43tags:
+
+linux
+lvs
+负载均衡算法categories: [linux-集群]
+
+
+LVS 的负载调度算法在内核中的连接调度算法上,IPVS 已实现了以下八种调度算法:
+轮叫调度(Round-Robin Scheduling)RR轮叫调度(Round Robin Scheduling)算法就是以轮叫的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LVS 的负载调度算法">
+<meta property="og:url" content="http://cherishry.github.io/2016-02-28-LVS 的负载调度算法 .html">
+<meta property="og:site_name" content="cherishry's Blog">
+<meta property="og:description" content="title:LVS在淘宝环境中的应用date: 2015-01-18 17:12:43tags:
+
+linux
+lvs
+负载均衡算法categories: [linux-集群]
+
+
+LVS 的负载调度算法在内核中的连接调度算法上,IPVS 已实现了以下八种调度算法:
+轮叫调度(Round-Robin Scheduling)RR轮叫调度(Round Robin Scheduling)算法就是以轮叫的">
+<meta property="og:updated_time" content="2016-03-03T10:48:02.191Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LVS 的负载调度算法">
+<meta name="twitter:description" content="title:LVS在淘宝环境中的应用date: 2015-01-18 17:12:43tags:
+
+linux
+lvs
+负载均衡算法categories: [linux-集群]
+
+
+LVS 的负载调度算法在内核中的连接调度算法上,IPVS 已实现了以下八种调度算法:
+轮叫调度(Round-Robin Scheduling)RR轮叫调度(Round Robin Scheduling)算法就是以轮叫的">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'always'
+  };
+</script>
+
+  <title> LVS 的负载调度算法 | cherishry's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">cherishry's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-next-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              LVS 的负载调度算法
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-02-28T00:19:00+08:00" content="2016-02-28">
+            2016-02-28
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>title:LVS在淘宝环境中的应用<br>date: 2015-01-18 17:12:43<br>tags:</p>
+<ul>
+<li>linux</li>
+<li>lvs</li>
+<li>负载均衡算法<br>categories: [linux-集群]</li>
+</ul>
+<hr>
+<h1 id="LVS_的负载调度算法">LVS 的负载调度算法</h1><p>在内核中的连接调度算法上,IPVS 已实现了以下八种调度算法:</p>
+<h2 id="轮叫调度(Round-Robin_Scheduling)RR">轮叫调度(Round-Robin Scheduling)RR</h2><p>轮叫调度(Round Robin Scheduling)算法就是以轮叫的方式依次将请求调度不同的服务器,即每次调度执行 i = (i + 1) mod n,并选出第 i 台服务器。算法的优点是其简洁性,它无需记录当前所有连接的状态,所以它是一种无状态调度。</p>
+<h2 id="加权轮叫调度(Weighted_Round-Robin_Scheduling)WRR">加权轮叫调度(Weighted Round-Robin Scheduling)WRR</h2><p>加权轮叫调度 (Weighted Round-Robin Scheduling)算法可以解决服务器间性能不一的情况,它用相应的权值表示服务器的处理性能,服务器的缺省权值为 1。假设服务器 A 的权值为 1,B 的 权值为 2,则表示服务器 B 的处理性能是 A 的两倍。加权轮叫调度算法是按权值的高低和轮叫方式分配请求到各服务器。权值高的服务器先收到的连接,权值高的服 务器比权值低的服务器处理更多的连接,相同权值的服务器处理相同数目的连接数。</p>
+<h2 id="最小连接调度(Least-Connection_Scheduling)">最小连接调度(Least-Connection Scheduling)</h2><p>最小连接调度(Least- Connection Scheduling)算法是把新的连接请求分配到当前连接数最小的服务器。最小连接调度是一种动态调度算法,它通过服务器当前所活跃的连接数来估计服务 器的负载情况。调度器需要记录各个服务器已建立连接的数目,当一个请求被调度到某台服务器,其连接数加 1;当连接中止或超时,其连接数减一。</p>
+<h2 id="加权最小连接调度(Weighted_Least-Connection_Scheduling)">加权最小连接调度(Weighted Least-Connection Scheduling)</h2><p>加权最小连接调 度(Weighted Least-Connection Scheduling)算法是最小连接调度的超集,各个服务器用相应的权值表示其处理性能。服务器的缺省权值为 1,系统管理员可以动态地设置服务器的权 值。加权最小连接调度在调度新连接时尽可能使服务器的已建立连接数和其权值成比例。</p>
+<h2 id="基于局部性的最少链接(Locality-Based_Least_Connections_Scheduling_)">基于局部性的最少链接(Locality-Based Least Connections Scheduling )</h2><p>基 于局部性的最少链接调度(Locality-Based Least Connections Scheduling,以下简称 LBLC)算法是针对请求报文的目标 IP 地址的负载均衡调度,目前主要用于 Cache 集群系统,因为在 Cache 集群中 客户请求报文的目标 IP 地址是变化的。这里假设任何后端服务器都可以处理任一请求,算法的设计目标是在服务器的负载基本平衡情况下,将相同目标 IP 地址的 请求调度到同一台服务器,来提高各台服务器的访问局部性和主存 Cache 命中率,从而整个集群系统的处理能力。LBLC 调度算法先根据请求的目标 IP 地址 找出该目标 IP 地址最近使用的服器,若该服务器是可用的且没有超载,将请求发送到该服务器;若服务器不存在,或者该服务器超载且有服务器处于其一半的工 作负载,则用“最少链接”的原则选出一个可用的服务器,将请求发送到该服务器。</p>
+<h2 id="带复制的基于局部性最少链接(Locality-Based_Least_Connections_withReplication_Scheduling)">带复制的基于局部性最少链接(Locality-Based Least Connections withReplication Scheduling)</h2><p>带 复制的基于局部性最少链接调度(Locality-Based Least Connections with ReplicationScheduling,以下简称为 LBLCR)算法也是针对目标 IP 地址的负载均衡,目前主要用于Cache 集群系统。它与 LBLC 算法的不同之处是它要 维护从一个目标 IP 地址到一组服务器的映射,而 LBLC 算法维护从一个目标 IP 地址到一台服务器的映射。对于一个“热门”站点的服务请求,一台 Cache 服务器可能会忙不过来处理这些请求。这时,LBLC 调度算法会从所有的Cache 服务器中按“最小连接”原则选出一台 Cache 服务器,映射该“热门”站 点到这台 Cache服务器,很快这台 Cache 服务器也会超载,就会重复上述过程选出新的 Cache 服务器。这样,可能会导致该“热门”站点的映像会出现 在所有的 Cache 服务器上,降低了 Cache 服务器的使用效率。LBLCR 调度算法将“热门”站点映射到一组 Cache 服务器(服务器集合),当该“热门”站点的请求负载增加时,会增加集合里的 Cache 服务器,来处理不断增长的负载;当该“热门”站点的请求负载降低时,会减少集合里的 Cache 服务器 数目。这样,该“热门”站点的映像不太可能出现在所有的 Cache 服务器上,从而提供 Cache 集群系统的使用效率。LBLCR 算法先根据请求的目标 IP 地址找出该目标 IP 地址对应的服务器组;按“最小连接”原则从该服务器组中选出一台服务器,若服务器没有超载,将请求发送到该服务器;若服务器超载;则按 “最小连接”原则从整个集群中选出一台服务器,将该服务器加入到服务器组中,将请求发送到该服务器。同时,当该服务器组有一段时间没有被修改,将最忙的服 务器从服务器组中删除,以降低复制的程度。</p>
+<h2 id="目标地址散列调度(Destination_Hashing_Scheduling)">目标地址散列调度(Destination Hashing Scheduling)</h2><p>目标地址散列调度 (Destination Hashing Scheduling)算法也是针对目标 IP 地址的负载均衡,但它是一种静态映射算法,通过一个散列(Hash)函数将一个目标 IP 地址映射到一台服务 器。目标地址散列调度算法先根据请求的目标 IP 地址,作为散列键(Hash Key)从静态分配的散列表找出对应的服务器,若该服务器是可用的且未超载,将请求发送到该服务器,否则返回空。</p>
+<h2 id="源地址散列调度(Source_Hashing_Scheduling)">源地址散列调度(Source Hashing Scheduling)</h2><p>源地址散列调度(Source Hashing Scheduling)算法正好与目标地址散列调度算法相反,它根据请求的源 IP 地址,作为散列键(Hash Key)从静态分配的散列表找出对应的服务器,若该服务器是可用的且未超载,将请求发送到该服务器,否则返回空。它采用的散列函数与目标地址散列调度算法 的相同。它的算法流程与目标地址散列调度算法的基本相似,除了将请求的目标 IP 地址换成请求的源 IP 地址,所以这里不一一叙述。在实际应用中,源地址散列 调度和目标地址散列调度可以结合使用在防火墙集群中,它们可以保证整个系统的唯一出入口。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016-02-28-heartbeat+lvs,给lvs 添加健康监测.html" rel="prev">heartbeat+lvs,给lvs 添加健康监测</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016-02-27-使用lvs（linux virtual serevr）做负载均衡.html" rel="next">使用lvs（linux virtual serevr）做负载均衡</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/head.jpg" alt="cherishry" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">cherishry</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">勿忘初心，方得始终</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LVS_的负载调度算法"><span class="nav-number">1.</span> <span class="nav-text">LVS 的负载调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#轮叫调度(Round-Robin_Scheduling)RR"><span class="nav-number">1.1.</span> <span class="nav-text">轮叫调度(Round-Robin Scheduling)RR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加权轮叫调度(Weighted_Round-Robin_Scheduling)WRR"><span class="nav-number">1.2.</span> <span class="nav-text">加权轮叫调度(Weighted Round-Robin Scheduling)WRR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最小连接调度(Least-Connection_Scheduling)"><span class="nav-number">1.3.</span> <span class="nav-text">最小连接调度(Least-Connection Scheduling)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加权最小连接调度(Weighted_Least-Connection_Scheduling)"><span class="nav-number">1.4.</span> <span class="nav-text">加权最小连接调度(Weighted Least-Connection Scheduling)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于局部性的最少链接(Locality-Based_Least_Connections_Scheduling_)"><span class="nav-number">1.5.</span> <span class="nav-text">基于局部性的最少链接(Locality-Based Least Connections Scheduling )</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#带复制的基于局部性最少链接(Locality-Based_Least_Connections_withReplication_Scheduling)"><span class="nav-number">1.6.</span> <span class="nav-text">带复制的基于局部性最少链接(Locality-Based Least Connections withReplication Scheduling)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目标地址散列调度(Destination_Hashing_Scheduling)"><span class="nav-number">1.7.</span> <span class="nav-text">目标地址散列调度(Destination Hashing Scheduling)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源地址散列调度(Source_Hashing_Scheduling)"><span class="nav-number">1.8.</span> <span class="nav-text">源地址散列调度(Source Hashing Scheduling)</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cherishry</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

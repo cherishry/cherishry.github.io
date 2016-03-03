@@ -1,0 +1,782 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="勿忘初心，方得始终" />
+
+
+
+  <meta name="keywords" content="linux,定时任务,进程," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="进程管理进程的简单了解进程和程序的区别
+程序是静态概念，本身作为一种软件资源长期保存；而进程是程序的执行过程，是动态概念，有一定的生命期，是动态产生和消亡的。
+
+程序和进程无一一对应关系，一个程序可以由多个时程公用；另一方面，一个进程在活动中有可顺序地执行若干程序。
+
+
+父子进程的关系
+子进程是由一个进程所产生的进程，产生这个子进程的进程称为父进程。
+
+在linux系统中，使用系统调用fork创建">
+<meta property="og:type" content="article">
+<meta property="og:title" content="进程管理">
+<meta property="og:url" content="http://cherishry.github.io/2015-09-17-进程管理.html">
+<meta property="og:site_name" content="cherishry's Blog">
+<meta property="og:description" content="进程管理进程的简单了解进程和程序的区别
+程序是静态概念，本身作为一种软件资源长期保存；而进程是程序的执行过程，是动态概念，有一定的生命期，是动态产生和消亡的。
+
+程序和进程无一一对应关系，一个程序可以由多个时程公用；另一方面，一个进程在活动中有可顺序地执行若干程序。
+
+
+父子进程的关系
+子进程是由一个进程所产生的进程，产生这个子进程的进程称为父进程。
+
+在linux系统中，使用系统调用fork创建">
+<meta property="og:image" content="http://7xo95f.com1.z0.glb.clouddn.com/%E8%BF%9B%E7%A8%8B%E4%BA%94%E6%80%81%E8%BD%AC%E6%8D%A2%E5%9B%BE.jpg">
+<meta property="og:updated_time" content="2016-03-03T09:43:58.869Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="进程管理">
+<meta name="twitter:description" content="进程管理进程的简单了解进程和程序的区别
+程序是静态概念，本身作为一种软件资源长期保存；而进程是程序的执行过程，是动态概念，有一定的生命期，是动态产生和消亡的。
+
+程序和进程无一一对应关系，一个程序可以由多个时程公用；另一方面，一个进程在活动中有可顺序地执行若干程序。
+
+
+父子进程的关系
+子进程是由一个进程所产生的进程，产生这个子进程的进程称为父进程。
+
+在linux系统中，使用系统调用fork创建">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'always'
+  };
+</script>
+
+  <title> 进程管理 | cherishry's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">cherishry's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-next-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              进程管理
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-09-17T14:03:31+08:00" content="2015-09-17">
+            2015-09-17
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/linux/" itemprop="url" rel="index">
+                  <span itemprop="name">linux</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h1 id="进程管理">进程管理</h1><h2 id="进程的简单了解">进程的简单了解</h2><h3 id="进程和程序的区别">进程和程序的区别</h3><ul>
+<li><p>程序是静态概念，本身作为一种软件资源长期保存；而进程是程序的执行过程，是动态概念，有一定的生命期，是动态产生和消亡的。</p>
+</li>
+<li><p>程序和进程无一一对应关系，一个程序可以由多个时程公用；另一方面，一个进程在活动中有可顺序地执行若干程序。</p>
+</li>
+</ul>
+<h3 id="父子进程的关系">父子进程的关系</h3><ul>
+<li><p>子进程是由一个进程所产生的进程，产生这个子进程的进程称为父进程。</p>
+</li>
+<li><p>在linux系统中，使用系统调用fork创建进程。Fork复制的内容包括父进程的数据和堆栈段以及父进程的进程环境。</p>
+</li>
+<li><p>父进程终止，子进程自然终止。</p>
+</li>
+</ul>
+<h3 id="前台进程和后台进程">前台进程和后台进程</h3><h4 id="前台进程">前台进程</h4><p>在shell提示处打入命令后，创建一个子进程，运行命令，shell等待命令退出，然后返回到对用户给出提示符。这条命令与shell异步运行，即在前台运行，用户在它完成之前不能执行另一个命令，就是说无法进行其他操作。 </p>
+<h4 id="后台进程">后台进程</h4><p>在shell提示处打入命令，后面加上<code>&amp;</code>,shell创建的子进程运行此命令，但是不等待命令退出，而是直接返回到对用户给出提示。这条命令与shell同步运行，在这个进程进行的同时，我们还可以做其他操作。【后台进程必须是非交互式的】</p>
+<h3 id="进程的状态">进程的状态</h3><h4 id="进程的状态-1">进程的状态</h4><ul>
+<li>就绪状态</li>
+<li>运行状态</li>
+<li>等待状态<h4 id="进程的状态转换">进程的状态转换</h4></li>
+</ul>
+<p>进程是操作系统为了控制多个程序而创建的数据，操作系统是通过修改进程的状态来完成对相应程序的控制，用户程序的一些操作也可以修改一些进程的状态。</p>
+<h5 id="进程三态转换图解析">进程三态转换图解析</h5><pre><code>![进程三态转换图](<span class="symbol">http:</span>/<span class="regexp">/7xo95f.com1.z0.glb.clouddn.com/</span><span class="variable">%E8</span><span class="variable">%BF</span><span class="variable">%9B</span><span class="variable">%E7</span><span class="variable">%A8</span><span class="variable">%8B</span><span class="variable">%E4</span><span class="variable">%B8</span><span class="variable">%89</span><span class="variable">%E6</span><span class="variable">%80</span><span class="variable">%81</span><span class="variable">%E8</span><span class="variable">%BD</span><span class="variable">%AC</span><span class="variable">%E6</span><span class="variable">%8D</span><span class="variable">%A2</span><span class="variable">%E5</span><span class="variable">%9B</span><span class="variable">%BE</span>.jpg)
+</code></pre><p> 注意：创建和退出不是进程的状态。创建操作不做重点解释。阻塞也叫等待，和就绪的区别：等待是等待除CPU以外的资源，而就绪等待的是CPU资源。</p>
+<p> (1) 创建—–就绪：用户发出命令，我要运行这个程序，然后，操作系统会就会创建进程，并为它分配资源（主要是内存空间），进程创建成功，此时把该进程插入到就绪队列中；</p>
+<p>(2) 就绪——执行：对就绪状态的进程，当进程调度程序按一种选定的策略从中选中一个就绪进程，为之分配了处理机后，该进程便由就绪状态变为执行状态；</p>
+<p>(进程的就绪状态的意思是，告诉操作系统我现在可以执行了，给我CPU让我运行吧；    操作系统的一个程序给就绪队列中的进程分配一定的时间让他们轮流占用CPU资源，一个就绪进程得到CPU资源后，就变成了运行状态)</p>
+<p>(3) 执行——等待：正在执行的进程因发生某等待事件而无法执行，则进程由执行状态变为等待状态，如进程提出输入/输出请求而变成等待外部设备传输信息的状态，进程申请资源（主存空间或外部设备）得不到满足时变成等待资源状态，进程运行中出现了故障（程序出错或主存储器读写错等）变成等待干预状态等等； </p>
+<p>(CPU执行某进程中的指令要求调用某一资源时，且该资源别的进程正在用，那么操作系统的这个程序会把该进程的状态变为阻塞状态，例如：指令要求用打印机，但是打印机正在打印东西，无法现在用，那么，操作系统会修改该进程的状态，并把他由就绪队列变为阻塞队列中) </p>
+<p>(4)等待——就绪：处于等待状态的进程，在其等待的事件已经发生，如输入/输出完成，资源得到满足或错误处理完毕时，处于等待状态的进程并不马上转入执行状态，而是先转入就绪状态，然后再由系统进程调度程序在适当的时候将该进程转为执行状态；</p>
+<p>(循环至正常运行结束，进程中有一些事后处理的指令，会把队列中的记录去掉)</p>
+<p>(5)执行——就绪：正在执行的进程，因时间片用完而被暂停执行，或在采用抢先式优先级调度算法的系统中,当有更高优先级的进程要运行而被迫让出处理机时，该进程便由执行状态转变为就绪状态。</p>
+<h5 id="进程的五态转换图">进程的五态转换图</h5><p><img src="http://7xo95f.com1.z0.glb.clouddn.com/%E8%BF%9B%E7%A8%8B%E4%BA%94%E6%80%81%E8%BD%AC%E6%8D%A2%E5%9B%BE.jpg" alt="进程五态状态装换图"></p>
+<p>【注意】：在进程的五态图中引入了挂起和激活的操作，另外，进程创建时可以先到静止就绪（主要是内存资源不足），其他的和三态图的操作一样。</p>
+<ul>
+<li><p>挂起：把该进程从内存中搬到外存上。</p>
+</li>
+<li><p>激活：又叫唤醒或恢复，操作是一样的，只是叫法不一样而已，该操作是把外存上的某个进程弄到内存上。</p>
+</li>
+</ul>
+<p>为什么要引入挂起和激活操作呢？</p>
+<p>(1) 用户的需要。用户调试一个程序的时候，运行该程序一多半了，但是，忽然发现该程序此时有Bug，用户想停下来修改，但是修改后，用户又不想从头开始运行该程序，此为一因。这样用户就可以先挂起进程，再次运行时，再激活就好啦！</p>
+<p>(2) 操作系统的需要。操作系统管理着资源的分配，它无法忍受那些占着资源而不运行的程序，另外，这些进程也会妨碍系统的运行速度，此为一因。</p>
+<h2 id="进程管理命令介绍">进程管理命令介绍</h2><h3 id="w查看当前系统信息">w查看当前系统信息</h3><pre><code>w命令,查看当前用户信息<span class="comment">(即谁登陆过我的系统)</span>，当然也可以查看到系统相关的信息。
+
+作用：查看当前系统活动摘要。
+</code></pre> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@foundation187 ~]<span class="preprocessor"># w</span></span><br><span class="line"> <span class="number">21</span>:<span class="number">58</span>:<span class="number">49</span> up <span class="number">5</span> min,  <span class="number">2</span> users,  load average: <span class="number">0.85</span>, <span class="number">1.31</span>, <span class="number">0.67</span></span><br><span class="line">USER   TTY    LOGIN@  IDLE   JCPU  PCPU  WHAT</span><br><span class="line">kiosk    :<span class="number">0</span>       <span class="number">21</span>:<span class="number">54</span>    ?xdm?  <span class="number">50.46</span>s  <span class="number">0.04</span>s gdm-session-worker [pam/gdm-autologin]</span><br><span class="line">kiosk    pts/<span class="number">0</span>     <span class="number">21</span>:<span class="number">56</span>    <span class="number">1.00</span>s   <span class="number">0.07</span>s   <span class="number">0.58</span>s  /usr/libexec/gnome-terminal-server</span><br><span class="line">```   </span><br><span class="line">    w显示信息的含义：</span><br><span class="line">   </span><br><span class="line">    JCPU: 以终端代号来区分，该终端所有相关的进程执行时，所消耗的CPU时间会显示在这里</span><br><span class="line">   </span><br><span class="line">    PCPU: CPU执行程序消耗的时间</span><br><span class="line">   </span><br><span class="line">    WHAT: 用户在执行的操作</span><br><span class="line">   </span><br><span class="line">    load average :分别显示系统在过去<span class="number">1</span>、<span class="number">5</span>、<span class="number">15</span>分钟内的平均负载程度</span><br><span class="line">   </span><br><span class="line">    FROM:  显示用户从何处登录系统，<span class="string">":0"</span>的显示代表该用户是从X Windows下，打开文本模式窗口登录的</span><br><span class="line">   </span><br><span class="line">    IDLE:   用户闲置的时间，这是一个计时器，一旦用户执行任何操作，该计时器便会被重置</span><br><span class="line">   </span><br><span class="line">    查看个别用户信息：w  [用户名]</span><br></pre></td></tr></table></figure>
+<pre><code>[root@localhost ~]<span class="preprocessor"># w root</span>
+
+<span class="number">23</span>:<span class="number">32</span>:<span class="number">01</span> up <span class="number">52</span> min, <span class="number">1</span> user, load average: <span class="number">0.00</span>, <span class="number">0.00</span>, <span class="number">0.00</span>
+
+USER TTY FROM LOGIN@ IDLE JCPU PCPU WHAT
+
+root pts/<span class="number">1</span> <span class="number">192.168</span><span class="number">.203</span><span class="number">.1</span> <span class="number">22</span>:<span class="number">53</span> <span class="number">0.00</span>s <span class="number">0.10</span>s <span class="number">0.01</span>s w root
+</code></pre>   <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">【注】</span><br><span class="line"><span class="keyword">last</span> 谁登陆过我的系统</span><br><span class="line"></span><br><span class="line">lastb 谁登陆过我的系统，即使没有登陆成功也会记录下来</span><br><span class="line"></span><br><span class="line">who是类似命令，提供当前登录用户列表、系统启动时间、运行级别等</span><br><span class="line"></span><br><span class="line">whoami 命令输出当前用户</span><br><span class="line"></span><br><span class="line"> ###ps进程查看命令</span><br><span class="line">   </span><br><span class="line"><span class="keyword">ps</span>应该是查看进程用得最普遍的命令</span><br><span class="line">   </span><br><span class="line">进程查看命令：<span class="keyword">ps</span></span><br><span class="line">   </span><br><span class="line">常用选项：</span><br></pre></td></tr></table></figure>
+<pre><code>-<span class="ruby"><span class="symbol">a:</span>显示所有用户的进程(all)
+</span>
+-<span class="ruby"><span class="symbol">u:</span>显示用户名和启动时间(user)
+</span>
+-<span class="ruby"><span class="symbol">x:</span>显示没有控制终端的进程
+</span>
+-<span class="ruby"><span class="symbol">e:</span>显示所有进程，包括没有控制终端的进程
+</span>
+-<span class="ruby"><span class="symbol">l:</span>长格式显示
+</span>
+-<span class="ruby">f 显示进程的子进程
+</span>
+-<span class="ruby"><span class="symbol">w:</span>宽行显示，可以使用多个w进行加宽显示 </span>
+</code></pre><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">应用实例：</span><br><span class="line">   </span><br><span class="line">e<span class="keyword">g1.</span>  ps 查看隶属自己的进程</span><br></pre></td></tr></table></figure>
+<p>[root@foundation187 ~]# ps<br>  PID TTY          TIME CMD<br> 1951 pts/0    00:00:00 su<br> 1954 pts/0    00:00:00 bash<br> 2287 pts/0    00:00:00 ps<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eg2. <span class="operator">-l</span>显示更多信息</span><br></pre></td></tr></table></figure></p>
+<p>[root@foundation187 ~]# ps -l<br>F S   UID   PID  PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD<br>4 S     0  1951  1916  0  80   0 - 45691 wait   pts/0    00:00:00 su<br>4 S     0  1954  1951  0  80   0 - 29165 wait   pts/0    00:00:00 bash<br>0 R     0  2302  1954  0  80   0 - 30315 -      pts/0    00:00:00 ps</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e<span class="keyword">g3.</span> 常用的组合</span><br></pre></td></tr></table></figure>
+<p>[root@foundation187 ~]# ps -aux<br>USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND<br>root         1  0.0  0.1  50544  4280 ?        Ss   21:53   0:00 /usr/lib/systemd/systemd –swit<br>root         2  0.0  0.0      0     0 ?        S    21:53   0:00 [kthreadd]<br>root         3  0.0  0.0      0     0 ?        S    21:53   0:00 [ksoftirqd/0]<br>root         5  0.0  0.0      0     0 ?        S&lt;   21:53   0:00 [kworker/0:0H]</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">看一下上面的选项都指的什么</span><br><span class="line">   </span><br><span class="line">    <span class="attribute">PID</span>:进程号</span><br><span class="line">   </span><br><span class="line">    <span class="attribute">PPID</span>: 父进程的进程号</span><br><span class="line">   </span><br><span class="line">    <span class="attribute">TTY </span>: 进程启动的终端</span><br><span class="line">   </span><br><span class="line">    <span class="attribute">STAT </span>: 进程当前状态（S休眠状态，D不可中断的休眠状态，R运行状态，Z僵死状态，T停止）</span><br><span class="line">   </span><br><span class="line">    <span class="attribute">NI </span>: 进程优先级</span><br><span class="line">   </span><br><span class="line">    <span class="attribute">TIME</span>:进程自从启动以后启用CPU的总时间</span><br><span class="line">   </span><br><span class="line">    COMMAND/<span class="attribute">CMD</span>:进程的命令名</span><br><span class="line">   </span><br><span class="line">    <span class="attribute">USER</span>:用户名</span><br><span class="line">   </span><br><span class="line">    %<span class="attribute">CPU</span>:占用CPU时间和总时间的百分比</span><br><span class="line">   </span><br><span class="line">    %<span class="attribute">MEM</span>:占用内存与系统内存总量的百分比</span><br><span class="line">   </span><br><span class="line">常用实例：</span><br><span class="line">   </span><br><span class="line">* 只查看cpu 并按数字(n)  逆序（从大到小排序</span><br></pre></td></tr></table></figure>
+<pre><code>[root<span class="variable">@vm1</span> ~]# ps -o <span class="variable">%cpu</span> | <span class="keyword">sort</span> -nr
+</code></pre><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* 如果分隔符的空格数是不同的，则不能用<span class="escape">`s</span>ort  -t <span class="escape">`分</span>隔符来排序了。这时候可以用awk来辅助。</span><br></pre></td></tr></table></figure>
+<p>[root@vm1 ~]# ps aux | grep -v % | awk ‘{print $2”:”$3}’ | sort -t “:” -k 2 -rn<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* <span class="keyword">ps</span> -<span class="keyword">u</span> <span class="built_in">or</span> -<span class="keyword">l</span> 查看隶属于自己进程详细信息</span><br></pre></td></tr></table></figure></p>
+<p>[root@foundation187 ~]# ps -u<br>[root@foundation187 ~]# ps -l<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* <span class="keyword">ps</span> -<span class="keyword">le</span> <span class="built_in">or</span> -aux 查看所有用户执行的进程的详细信息</span><br></pre></td></tr></table></figure></p>
+<p>[root@foundation187 ~]# ps -le<br>[root@foundation187 ~]# ps -aux<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* <span class="keyword">ps</span> -aux --<span class="built_in">sort</span> pid 可按进程执行的时间、PID、UID等对进程进行排序</span><br></pre></td></tr></table></figure></p>
+<p>[root@foundation187 ~]# ps -aux –sort pid</p>
+<p>[root@foundation187 ~]# ps -aux –sort uid<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* <span class="keyword">ps</span> -<span class="keyword">le</span> | <span class="keyword">grep</span> init 查看指定进程信息</span><br></pre></td></tr></table></figure></p>
+<p>   [root@foundation187 ~]# ps -le | grep init<br><figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">### pstree可视化方式显示进程</span></span><br><span class="line"></span><br><span class="line">linux中，每一个进程都是由其父进程创建的。此命令以可视化方式显示进程，通过显示进程的树状图来展示进程间关系。</span><br><span class="line"></span><br><span class="line">Rhel6<span class="number">.5</span>中，如果指定了<span class="keyword">pid</span>了，那么树的根是该<span class="keyword">pid</span>，不然将会是init（<span class="keyword">pid</span>:<span class="number">1</span>）</span><br><span class="line"></span><br><span class="line">Rhel7<span class="number">.0</span>中，如果指定了<span class="keyword">pid</span>了，那么树的根是该<span class="keyword">pid</span>，不然将会是systemd（<span class="keyword">pid</span>:<span class="number">1</span>）</span><br><span class="line"></span><br><span class="line"><span class="comment">### top查看进程命令(类似与ps)</span></span><br><span class="line"></span><br><span class="line">top是一个更加有用的命令，可以监视系统中不同的进程所使用的资源。它提供实时的系统状态信息。显示进程的数据包括 PID、进程属主、优先级、%CPU、%<span class="keyword">memory</span>等。可以使用这些显示指示出资源使用量。</span><br><span class="line"></span><br><span class="line">常用命令：</span><br></pre></td></tr></table></figure></p>
+<p>B         控制正在被执行的进程，是否被粗显。<br>b         控制正在被执行的程序，是否反白显示<br>P         按CPU的使用排序（默认情况下是这样子的）<br>M         按内存的使用排序<br>U u         都是按用户进行过滤<br>k          杀死一个进程 会提示你输入进程号<br>r          给进程重新指定优先级<br>W         保存对top命令显示的样式的设置，将当前设置写入~/.toprc文件中<br>s        改变刷新的时间间隔<br>q         退出top命令<br>h or ?   获得帮助<br> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">### htop(类似top)</span></span><br><span class="line"></span><br><span class="line">htop与top很类似，但是htop是交互式的文本模式的进程查看器。它通过文字图形化地显示每一个进程的CPU和内存使用量、swap使用量。使用上下光标键选择进程，F7和F8改变优先级，F9杀死进程。Htop不是系统默认安装的，所以需要额外安装。请参考文章【linux下取代top命令的htop】</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">### nice通过给定优先值启动一个进程</span></span><br><span class="line"></span><br><span class="line">通过nice命令的帮助，用户可以设置和改变进程的优先级。提高一个进程的优先级，内核会分配更多CPU时间片给这个进程。默认情况下，进程以<span class="number">0</span>的优先级启动。进程优先级可以通过top命令显示的NI（nice value）列查看。</span><br><span class="line"></span><br><span class="line">进程优先级值的范围从[-<span class="number">20</span>,<span class="number">19</span>]。值越低，优先级越高,-<span class="number">20</span>的优先级最高，在我们设置优先级为-<span class="number">30</span>的时候，系统默认为-<span class="number">20</span>。</span><br><span class="line"></span><br><span class="line">`nice  &lt;优先值&gt;  &lt;进程名&gt; 			<span class="preprocessor">#通过给定的优先值启动一个进程`</span></span><br><span class="line">   </span><br><span class="line">    格式：nice -n command</span><br><span class="line">   </span><br><span class="line">   `nice -n -<span class="number">20</span> top				<span class="preprocessor">#以-<span class="number">20</span>的优先级启动top进程，进去后顺便查看top的NI是否为-<span class="number">20</span> `</span></span><br><span class="line">   </span><br><span class="line"><span class="preprocessor">### renice改变正在运行的进程优先级</span></span><br><span class="line"></span><br><span class="line">renice命令类似nice命令。使用这个命令可以改变正在运行的进程优先值。注意，用户	只能改变属于他们自己的进程的优先值。</span><br><span class="line"></span><br><span class="line">```    </span><br><span class="line">renice -n pid				 <span class="preprocessor">#改变指定进程的优先值</span></span><br><span class="line"></span><br><span class="line">renice -u -g 				<span class="preprocessor">#通过指定用户和组来改变进程优先值</span></span><br><span class="line">```   </span><br><span class="line">eg.</span><br><span class="line"></span><br><span class="line">【注】：这里我使用的是虚拟机vm1做实验，运用前面所学习的screen命令，使得top进程一直运行</span><br></pre></td></tr></table></figure></p>
+<p>[root@vm1 ~]# ps -le | grep top                #查看top的优先级NI为0<br>4 S     0  1175  1166  0  80   0 -  3753 poll_s pts/1    00:00:00 top<br>[root@vm1 ~]# renice -5 1175                #查看top的进程号为1175，在这里将它的优先级修改为-5<br>1175: old priority 0, new priority -5<br>[root@vm1 ~]# ps -le | grep top                #再次查看，已经改为-5<br>4 S     0  1175  1166  0  75  -5 -  3753 poll_s pts/1    00:00:00 top<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="header">### kill终止进程</span></span><br><span class="line">   </span><br><span class="line">在linux下,我们可以使用kill命令来终止进程。</span><br><span class="line">   </span><br><span class="line"><span class="header">#### 杀死进程的原因</span></span><br><span class="line">   </span><br><span class="line"><span class="bullet">* </span>该进程用了过多的CPU时间</span><br><span class="line">   </span><br><span class="line"><span class="bullet">* </span>该进程锁住了一个终端，使其他前台进程无法运行</span><br><span class="line">   </span><br><span class="line"><span class="bullet">* </span>运行时间过长，但没有预期效果</span><br><span class="line">   </span><br><span class="line"><span class="bullet">* </span>产生了过多到屏幕或磁盘文件的输出</span><br><span class="line">   </span><br><span class="line"><span class="bullet">* </span>无法正常退出</span><br><span class="line">   </span><br><span class="line"><span class="header">#### kill用法</span></span><br></pre></td></tr></table></figure></p>
+<p>kill            -1            进程pid                ##进程重读配置<br>-2            进程pid                ##撤销录入内存中的数据<br>            -3            进程pid                ##撤销内存中的鼠标显示<br>-9            进程pid                ##强制关闭进程<br>-15            进程pid                ##正常关闭进程<br>-18            进程pid                ##激活休眠的进程<br>-19            进程pid                ##使进程休眠<br>-20            进程pid                ##使占用终端的进程进入后台休眠<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="header">#### 其他</span></span><br><span class="line">   </span><br><span class="line"><span class="bullet">* </span>关闭图形程序： xkill</span><br><span class="line">   </span><br><span class="line"><span class="code">    当你在终端下输入这个命令时，你的鼠标会变成一个小叉子，你只去点你想要关闭的窗口就可以关闭了</span></span><br><span class="line">   </span><br><span class="line"><span class="bullet">* </span>结束所有进程killall</span><br></pre></td></tr></table></figure></p>
+<p>killall    -1        进程名称<br>-2<br>-3<br>-9<br>-15<br>-18<br>-19<br>-20<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   </span><br><span class="line">【注】：各选项的作用如同<span class="built_in">kill</span></span><br><span class="line"></span><br><span class="line">   * 查找服务进程号pgrep</span><br></pre></td></tr></table></figure></p>
+<p>pgrep  [服务名称]</p>
+<p>pgrep httpd<br><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 关闭进程pkill   <span class="string">[进程名称]</span></span><br></pre></td></tr></table></figure></p>
+<p>pkill   [进程名称]</p>
+<p>pkill httpd<br><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">### fg,bg(前后台运行，终止与挂起)</span><br><span class="line"></span><br><span class="line">有时，命令需要很长的时间才能执行完成。对于这种情况，<span class="escape">`j</span>obs<span class="escape">`可</span>以查看当前终端的进程，<span class="escape">`b</span>g<span class="escape">`命</span>令可以将任务放在后台执行，<span class="escape">`f</span>g<span class="escape">`可</span>以调到前台来使用。</span><br></pre></td></tr></table></figure></p>
+<p>[root@vm1 ~]# cat                #ctrl + z 把进程打入后台运行,并停止或者说挂起。进程的状态是Stopped<br>^Z<br>[2]+  Stopped                 cat </p>
+<p>[root@vm1 ~]# sleep 1000 &amp;        #&amp;释放终端 让进程在后台运行，状态是Running（类似与<code>bg</code>）<br>[1] 6344</p>
+<p>[root@vm1 ~]# jobs            #Jobs 查看当前终端的进程<br>[1]-  Running                 sleep 1000 &amp;<br>[2]+  Stopped                 cat<br><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="escape">`[</span> ]<span class="escape">`里</span>的号码就是进程在当前终端的序号</span><br></pre></td></tr></table></figure></p>
+<p>[root@vm1 ~]# fg 1            #使进程1在前台运行<br>sleep 1000</p>
+<p>[root@vm1 ~]# bg 2            #使进程2在后台运行<br>[2]+ cat &amp;<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">终止：（ctrl+c）</span><br><span class="line"></span><br><span class="line">### ulimit</span><br><span class="line"></span><br><span class="line">该命令用于控制系统资源在shell和进程上的分配量。对于系统管理员是最有用的，可以管理重度使用和存在性能问题的系统。限制资源大小可以确保重要进程持续运行，其他进程不会占用过多资源。</span><br><span class="line"></span><br><span class="line">ulimit -a -显示当前用户关联的资源限制</span><br><span class="line"></span><br><span class="line">    -<span class="ruby">f -最大文件尺寸大小</span><br><span class="line"></span>    -<span class="ruby">v -最大虚拟内存大小（<span class="constant">KB</span>）</span><br><span class="line"></span>    -<span class="ruby">n -增加最大文件描述符数量</span><br><span class="line"></span>    -<span class="ruby"><span class="constant">H</span> <span class="symbol">:</span>改变和报告硬限制</span><br><span class="line"></span>    -<span class="ruby"><span class="constant">S</span> <span class="symbol">:</span>改变和报告软限制</span><br><span class="line"></span></span><br><span class="line">### nohup</span><br><span class="line"></span><br><span class="line">nohup命令可以在用户退出时继续执行某一进程</span><br><span class="line">   </span><br><span class="line">一般的命令在用户退登录后就停止执行了，nohup命令可以使进程在用户退出登录后仍旧继续执行。nohup命令将执行后的数据信息和错误信息默认存储到文件nohup.out中</span><br><span class="line">   </span><br><span class="line">格式：</span><br><span class="line">   </span><br><span class="line">nohup program &amp;</span><br><span class="line">   </span><br><span class="line">eg.</span><br></pre></td></tr></table></figure></p>
+<p>[root@vm1 mnt]# nohup find / -name init* &gt; /mnt/file &amp;<br>[1] 6377</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">如果我们没指定/mnt/file这个保存位置的话，系统默认会把查询的结果放到nohup.out的文件中。我们一般不会去使用默认方式保存。</span><br><span class="line"><span class="preprocessor">## 计划任务</span></span><br><span class="line">   </span><br><span class="line"><span class="preprocessor">### 设置计划任务的原因</span></span><br><span class="line">   </span><br><span class="line">我们在系统的管理中，很多时候不是及时的去操作，比如对某一网站数据的备份，备份的过程需要占用大量的系统资源，凌晨三四点的时候系统访问用户最少，系统最空闲。但我们的系统的系统管理员总不能老那个时间爬起来操作吧。</span><br><span class="line">   </span><br><span class="line"><span class="preprocessor">### 计划任务的命令</span></span><br><span class="line">   </span><br><span class="line">计划命令分一次性计划和周期性计划。</span><br></pre></td></tr></table></figure>
+<pre><code><span class="keyword">at</span>    安排作业在某一时刻执行一次
+
+batch  安排作业在系统负载不重时执行一次
+
+crontab    安排周期性运行的作业
+</code></pre><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">* 一次性计划<span class="keyword">at</span>和batch</span><br><span class="line">   </span><br><span class="line"><span class="keyword">at</span>命令指定时间的方式</span><br><span class="line">   </span><br><span class="line">绝对计时方法：</span><br></pre></td></tr></table></figure>
+<pre><code>midnight noon teatime
+
+<span class="label">hh:</span>mm [today]
+
+<span class="label">hh:</span>mm tomorrow
+
+<span class="label">hh:</span>mm 星期
+
+<span class="label">hh:</span>mm MM/DD/YY
+</code></pre><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">相对计时方法：</span><br><span class="line"></span><br><span class="line">  ``` </span><br><span class="line">    now+<span class="keyword">n</span> minutes</span><br><span class="line">   </span><br><span class="line">    mow+<span class="keyword">n</span> hours</span><br><span class="line">   </span><br><span class="line">    now+<span class="keyword">n</span> days</span><br></pre></td></tr></table></figure>
+<p>用法：</p>
+<p>指定在今天下午17:30执行某命令（假设现在时间是下午14:30,2016年2月2日）</p>
+<p>命令格式：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">    at <span class="number">5</span>:<span class="number">30</span>pm</span><br><span class="line">   </span><br><span class="line">    at <span class="number">17</span>:<span class="number">30</span></span><br><span class="line">   </span><br><span class="line">    at <span class="number">17</span>:<span class="number">30</span> today</span><br><span class="line">   </span><br><span class="line">    at now+<span class="number">3</span> hours</span><br><span class="line">   </span><br><span class="line">    at now+<span class="number">180</span> minutes</span><br><span class="line">   </span><br><span class="line">    at <span class="number">17</span>:<span class="number">30</span> <span class="number">16.2</span><span class="number">.2</span></span><br><span class="line">   </span><br><span class="line">    at <span class="number">17</span>:<span class="number">30</span> <span class="number">2.2</span><span class="number">.16</span></span><br><span class="line">   </span><br><span class="line">  ```   </span><br><span class="line">我们定的时间是<span class="number">5</span>分钟之后，可以在at下面输入各种任务，保存！<span class="number">5</span>分钟之后执行；不过，我们需要注意，在用命令时最好写命令的绝对路径，为了安全。</span><br></pre></td></tr></table></figure>
+<pre><code>[root@vm1 ~]<span class="comment"># at now+5 minutes</span>
+
+<span class="keyword">at</span>&gt;touch /mnt/<span class="type">file</span>   
+
+<span class="keyword">at</span>&gt;                   <span class="comment">#可以继续写其它的计划</span>
+
+<span class="keyword">at</span>&gt; &lt;EOT&gt;            <span class="comment"># ctrl+d保存计划并退出</span>
+</code></pre><p>job 2 at 2012-05-20 13:43<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">是否还担心我们的计划是否启动，通过下面两个命令查看<span class="keyword">at</span>进程是否正常启动</span><br></pre></td></tr></table></figure></p>
+<pre><code>[root<span class="constant">@vm1</span> ~]<span class="preprocessor"># at -l</span>
+[root<span class="constant">@vm1</span> ~]<span class="preprocessor"># atq</span>
+
+如果真的没有启动的话，可以通过手工方式重新启动一下
+
+[root<span class="constant">@vm1</span> ~]<span class="preprocessor"># /etc/init.d/atd start</span>
+</code></pre><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* 删除<span class="keyword">at</span>计划任务</span><br></pre></td></tr></table></figure>
+<p>   [root@vm1 ~]# at -d<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* 查看<span class="keyword">at</span>计划任务</span><br></pre></td></tr></table></figure></p>
+<p>[root@vm1 ~]# ls /var/spool/at/<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">batch命令</span><br><span class="line">   </span><br><span class="line">作用：</span><br><span class="line">   </span><br><span class="line">安排一个或多个命令在系统负载较轻进运行一次（一般情况下负载较轻指平均负载降到0.8以下）</span><br><span class="line">   </span><br><span class="line">使用方法同at</span><br><span class="line">   </span><br><span class="line">* 周期性计划命令crontab</span><br><span class="line">   </span><br><span class="line">作用：用于生成cron进程所需要的crontab文件</span><br><span class="line">   </span><br><span class="line">crontab的命令格式</span><br><span class="line">   </span><br><span class="line">crontab &#123;-l|-r|-e&#125;</span><br><span class="line">   </span><br><span class="line">-<span class="ruby">l   显示当前的crontab</span><br><span class="line"></span>   </span><br><span class="line">-<span class="ruby">r   删除当前的crontab</span><br><span class="line"></span>   </span><br><span class="line">-<span class="ruby">e   使用编辑器编辑当前crontab文件</span><br><span class="line"></span>   </span><br><span class="line">好多人都觉得周期计划任务设置起来比较麻烦，其实我们只要掌握规律就很好设置。</span><br><span class="line">   </span><br><span class="line">`crontab -e`</span><br><span class="line">   </span><br><span class="line">规则：  把知道的具体的时间添上，不知道的都添加上*</span><br></pre></td></tr></table></figure></p>
+<p>分钟    小时   天    月    星期   命令/脚本<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">eg1.我们每天早上<span class="number">4</span>点要做一下操作，以下面方式表示：</span><br><span class="line"></span><br><span class="line">` *         <span class="number">4</span>      *    *    *    [具体的操作]`</span><br><span class="line"></span><br><span class="line">eg2. 我们每周一和三下午的<span class="number">6</span>点要做一下操作，以下面方式表示：</span><br><span class="line"></span><br><span class="line">    `*         <span class="number">18</span>     *     *   <span class="number">1</span>,<span class="number">3</span>      [具体的操作]`</span><br><span class="line">   </span><br><span class="line">案例：在上学的时候都有上机课，周一到周五，下午<span class="number">5</span>点<span class="number">30</span>下课。我们需要在<span class="number">5</span>点<span class="number">30</span>发一个通知，<span class="number">5</span>点<span class="number">45</span>自动关机。设定计划任务需要分两步完成，第一步提醒，第二步关机</span><br><span class="line">   </span><br><span class="line">    分钟   小时    天   月    星期    命令/脚本</span><br><span class="line">   </span><br><span class="line">    <span class="number">30</span>     <span class="number">17</span>      *    *    <span class="number">1</span>-<span class="number">5</span>    		提醒脚本</span><br><span class="line">   </span><br><span class="line">    <span class="number">45</span>     <span class="number">17</span>      *    *    <span class="number">1</span>-<span class="number">5</span>    /usr/bin/shudown -h now</span><br><span class="line">   </span><br><span class="line">操作方法：</span><br><span class="line"> </span><br><span class="line">`crontab: installing <span class="keyword">new</span> crontab` 表示创建计划成功</span><br><span class="line">   </span><br><span class="line">通过下面方式进行查看计划：</span><br></pre></td></tr></table></figure></p>
+<pre><code>[root<span class="constant">@vm1</span> ~]<span class="preprocessor"># cd /var/spool/cron</span>
+
+[root<span class="constant">@vm1</span> ~]<span class="preprocessor"># ls</span>
+
+root
+</code></pre><p>   [root@vm1 ~]# cat root</p>
+<pre><code><span class="number">30</span> <span class="number">17</span> * * <span class="number">1</span>-<span class="number">5</span> /usr/bin/shudown -h now  计划任务
+</code></pre><p>```</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag">#linux</a>
+          
+            <a href="/tags/定时任务/" rel="tag">#定时任务</a>
+          
+            <a href="/tags/进程/" rel="tag">#进程</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015-09-18-一个存放在内存中的特殊目录 (proc).html" rel="prev">一个存放内存中的特殊目录/proc</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015-09-15-网络守护进程服务程序--xinetd的详解.html" rel="next">网络守护进程服务程序--xinetd的详解</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/head.jpg" alt="cherishry" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">cherishry</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">勿忘初心，方得始终</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#进程管理"><span class="nav-number">1.</span> <span class="nav-text">进程管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程的简单了解"><span class="nav-number">1.1.</span> <span class="nav-text">进程的简单了解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程和程序的区别"><span class="nav-number">1.1.1.</span> <span class="nav-text">进程和程序的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#父子进程的关系"><span class="nav-number">1.1.2.</span> <span class="nav-text">父子进程的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前台进程和后台进程"><span class="nav-number">1.1.3.</span> <span class="nav-text">前台进程和后台进程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#前台进程"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">前台进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后台进程"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">后台进程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的状态"><span class="nav-number">1.1.4.</span> <span class="nav-text">进程的状态</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#进程的状态-1"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">进程的状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程的状态转换"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">进程的状态转换</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#进程三态转换图解析"><span class="nav-number">1.1.4.2.1.</span> <span class="nav-text">进程三态转换图解析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#进程的五态转换图"><span class="nav-number">1.1.4.2.2.</span> <span class="nav-text">进程的五态转换图</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程管理命令介绍"><span class="nav-number">1.2.</span> <span class="nav-text">进程管理命令介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#w查看当前系统信息"><span class="nav-number">1.2.1.</span> <span class="nav-text">w查看当前系统信息</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cherishry</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

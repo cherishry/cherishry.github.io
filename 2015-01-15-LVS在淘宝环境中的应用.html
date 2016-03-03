@@ -1,0 +1,717 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="勿忘初心，方得始终" />
+
+
+
+  <meta name="keywords" content="linux,lvs," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="title:LVS在淘宝环境中的应用date: 2015-01-16 12:12:23tags:
+
+linux
+lvs
+负载均衡categories: [linux-集群]
+
+
+参考文献：阿里lvs.pdf-小敏的PPT私家菜谱参考博客：blog.aliyun.com
+个人简介吴佳明_普空——核心系统研发一直从事系统网络相关技术研发,包括 IDC网络、内核TCP/IP协议、4/7层负载均衡、CDN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LVS在淘宝环境中的应用">
+<meta property="og:url" content="http://cherishry.github.io/2015-01-15-LVS在淘宝环境中的应用.html">
+<meta property="og:site_name" content="cherishry's Blog">
+<meta property="og:description" content="title:LVS在淘宝环境中的应用date: 2015-01-16 12:12:23tags:
+
+linux
+lvs
+负载均衡categories: [linux-集群]
+
+
+参考文献：阿里lvs.pdf-小敏的PPT私家菜谱参考博客：blog.aliyun.com
+个人简介吴佳明_普空——核心系统研发一直从事系统网络相关技术研发,包括 IDC网络、内核TCP/IP协议、4/7层负载均衡、CDN">
+<meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/23-24-01.jpg">
+<meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/23-25-33.jpg">
+<meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/23-28-29.jpg">
+<meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/23-32-15.jpg">
+<meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/23-34-48.jpg">
+<meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/23-35-43.jpg">
+<meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/23-39-34.jpg">
+<meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/23-40-51.jpg">
+<meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/23-44-07.jpg">
+<meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/23-45-54.jpg">
+<meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/23-49-38.jpg">
+<meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/23-51-14.jpg">
+<meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/23-56-05.jpg">
+<meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/23-56-31.jpg">
+<meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/23-57-12.jpg">
+<meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/00-02-15.jpg">
+<meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/00-03-16.jpg">
+<meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/00-03-39.jpg">
+<meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/00-06-18.jpg">
+<meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/00-07-06.jpg">
+<meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/00-10-42.jpg">
+<meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/00-10-58.jpg">
+<meta property="og:image" content="http://cherishry.github.io/images/LVS在淘宝环境中的应用/00-12-08.jpg">
+<meta property="og:updated_time" content="2016-03-03T10:47:22.680Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LVS在淘宝环境中的应用">
+<meta name="twitter:description" content="title:LVS在淘宝环境中的应用date: 2015-01-16 12:12:23tags:
+
+linux
+lvs
+负载均衡categories: [linux-集群]
+
+
+参考文献：阿里lvs.pdf-小敏的PPT私家菜谱参考博客：blog.aliyun.com
+个人简介吴佳明_普空——核心系统研发一直从事系统网络相关技术研发,包括 IDC网络、内核TCP/IP协议、4/7层负载均衡、CDN">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'always'
+  };
+</script>
+
+  <title> LVS在淘宝环境中的应用 | cherishry's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">cherishry's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-next-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              LVS在淘宝环境中的应用
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-01-15T08:32:00+08:00" content="2015-01-15">
+            2015-01-15
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/linux/" itemprop="url" rel="index">
+                  <span itemprop="name">linux</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>title:LVS在淘宝环境中的应用<br>date: 2015-01-16 12:12:23<br>tags:</p>
+<ul>
+<li>linux</li>
+<li>lvs</li>
+<li>负载均衡<br>categories: [linux-集群]</li>
+</ul>
+<hr>
+<p>参考文献：阿里lvs.pdf-小敏的PPT私家菜谱<br>参考博客：<a href="http://blog.aliyun.com/1750" target="_blank" rel="external">blog.aliyun.com</a></p>
+<h2 id="个人简介">个人简介</h2><p>吴佳明_普空——核心系统研发<br>一直从事系统网络相关技术研发,包括 IDC<br>网络、内核TCP/IP协议、4/7层负载均衡、<br>CDN、DDOS攻击防御等;<br>• 2007.4~2011.5 就职亍 百度,资深系统工程<br>师,完成 百度网络4层统一接入和接出;<br>• 2011.5~至今 就职亍 淘宝,技术专家,从事<br>LVS 等网络技术研发;</p>
+<h2 id="主要内容">主要内容</h2><ol>
+<li>LVS-简介</li>
+<li>LVS-问题</li>
+<li>LVS-fullnat</li>
+<li>LVS-synproxy</li>
+<li>LVS-cluster</li>
+<li>LVS-performance</li>
+<li>LVS-todo list<h2 id="LVS-简介">LVS-简介</h2><h3 id="简介-why">简介-why</h3><img src="/images/LVS在淘宝环境中的应用/23-24-01.jpg" alt=""><br>Q: 用户访问淘宝,如何决定访问哪一台Apache?</li>
+</ol>
+<p><img src="/images/LVS在淘宝环境中的应用/23-25-33.jpg" alt=""><br>A: 传统做法,DNS服务<br>Q1：apache down，remove生效时间不可控<br>Q2：只支持WRR的调度策略<br>Q3：apache间负载不均匀<br>Q4：攻击防御能力弱</p>
+<p><img src="/images/LVS在淘宝环境中的应用/23-28-29.jpg" alt=""><br>A:引入Virtual Server</p>
+<h3 id="简介-what">简介-what</h3><p>• 4层Load Balance<br>– 基亍传输层信息进行 调度<br>– 调度算法:WRR/WLC 等<br>– 工作模式:NAT/DR/TUNNEL<br>– 传输协议:TCP/UDP</p>
+<h4 id="NAT工作模式">NAT工作模式</h4><p><img src="/images/LVS在淘宝环境中的应用/23-32-15.jpg" alt=""><br>IN(2):DNAT<br>OUT(4):SNAT</p>
+<h4 id="TUNNEL工作模式">TUNNEL工作模式</h4><p><img src="/images/LVS在淘宝环境中的应用/23-34-48.jpg" alt=""><br>IN:增加1个IP头<br>OUT:NULL                                                                                                                                                                                                        </p>
+<h4 id="DR工作模式">DR工作模式</h4><p><img src="/images/LVS在淘宝环境中的应用/23-35-43.jpg" alt=""><br>IN:更改目癿MAC<br>OUT:NULL</p>
+<h3 id="简介-应用">简介-应用</h3><h4 id="LVS">LVS</h4><p>– 内核模块:ip_vs<br>– 实现了负载均衡</p>
+<h4 id="Q">Q</h4><p>– 某台RealServer down了,怎么办?<br>– LVS本身down了,怎么办?</p>
+<h4 id="A">A</h4><p>– 某台RealServer down了,怎么办? — 健康检测<br>– LVS本身down了,怎么办?—LVS冗余</p>
+<h4 id="Keepalived_–_LVS管理软件">Keepalived – LVS管理软件</h4><p>– 健康检测:支持4/7监测;<br>– 主备冗余:采用VRRP协议癿HeartBeat;<br>– 如何配置?— 配置文件<br><code>Keepalived –f /etc/keepalived/keepalived.conf</code><br>Q:缺少监控系统?LVS具有开源SNMP Patch<br><img src="/images/LVS在淘宝环境中的应用/23-39-34.jpg" alt=""></p>
+<h3 id="问题">问题</h3><p>• LVS在大规模网络中应用存在不足<br>– 各转发模式,网络拓扑复杂,运维成本高<br>• 和商用LB设备相比<br>– 缺少TCP标志位DDOS攻击防御<br>• 主备部署方式不足<br>– 性能无法线性扩展</p>
+<h4 id="DR模式-不足">DR模式-不足</h4><ol>
+<li>LVS-RS间必须在同一个VLAN</li>
+<li>RS上绑定VIP,风险大;<br><img src="/images/LVS在淘宝环境中的应用/23-40-51.jpg" alt=""><br>IN:更改目的MAC<br>OUT:NULL<h4 id="NAT模式-不足">NAT模式-不足</h4></li>
+<li>RS/ROUTER配置策略路由<br><img src="/images/LVS在淘宝环境中的应用/23-44-07.jpg" alt=""><h4 id="TUNNEL-不足">TUNNEL-不足</h4></li>
+<li>RS配置复杂(IPIP模块等)</li>
+<li>RS上绑定VIP,风险大;<br><img src="/images/LVS在淘宝环境中的应用/23-45-54.jpg" alt=""><h3 id="解决方法">解决方法</h3>• LVS各转发模式运维成本高<br>– 新转发模式FULLNAT:实现LVS-RealServer间跨vlan通讯,并<br>且in/out流都经过LVS;<br>• 缺少攻击防御模块<br>– SYNPROXY:synflood攻击防御模块<br>– 其它TCP FLAG DDOS攻击防御策略<br>• 性能无法线性扩展<br>– Cluster部署模式<br>– 主要思想:引入local address(内网ip地址),cip-vip转<br>换为lip-&gt;rip,而 lip和rip均为IDC内网ip,可以跨vlan通<br>讯;<br>– keepalived配置方式:<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">virtual_server <span class="number">125.76</span><span class="number">.224</span><span class="number">.240</span> &#123;</span><br><span class="line">lb_kind FNAT/DR/NAT/TUNNEL</span><br><span class="line">local_address &#123;</span><br><span class="line"><span class="number">192.168</span><span class="number">.1</span><span class="number">.1</span></span><br><span class="line">&#125;</span><br><span class="line">`</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="FULLNAT转发模式">FULLNAT转发模式</h4><p><img src="/images/LVS在淘宝环境中的应用/23-49-38.jpg" alt=""></p>
+<h2 id="FULLNAT">FULLNAT</h2><h3 id="NAT实现原理">NAT实现原理</h3><p><img src="/images/LVS在淘宝环境中的应用/23-51-14.jpg" alt=""></p>
+<h3 id="FULLNAT实现原理">FULLNAT实现原理</h3><p><img src="/images/LVS在淘宝环境中的应用/23-56-05.jpg" alt=""></p>
+<h3 id="NAT-HOOK点">NAT-HOOK点</h3><p><img src="/images/LVS在淘宝环境中的应用/23-56-31.jpg" alt=""><br>NETFILTER HOOK点,同iptables<br>为什么是这2个HOOK点?</p>
+<h3 id="FULLNAT-HOOK点">FULLNAT-HOOK点</h3><p><img src="/images/LVS在淘宝环境中的应用/23-57-12.jpg" alt=""><br>区分 IN/OUT 流</p>
+<h3 id="NAT-session表">NAT-session表</h3><p><img src="/images/LVS在淘宝环境中的应用/00-02-15.jpg" alt=""><br>用client address作为hash keyFULLNAT</p>
+<h3 id="FULLNAT-session表">FULLNAT-session表</h3><p><img src="/images/LVS在淘宝环境中的应用/00-03-16.jpg" alt=""><br>双向hash,用五元组作为hash keyFULLNAT</p>
+<h3 id="FULLNAT-获取client_address(TOA)">FULLNAT-获取client address(TOA)</h3><p><img src="/images/LVS在淘宝环境中的应用/00-03-39.jpg" alt=""></p>
+<p>TOA: address of tcp optionFULLNAT</p>
+<h3 id="FULLNAT-设计考虑">FULLNAT-设计考虑</h3><p>– TCP OPT-TIMESTAMP<br>• RealServer kernel开启tcp_tw_recycle<br>• 用户A和B,timestamp大癿访问成功,timestamp小癿访问失败<br>– TCP OPT-MSS<br>• TCP三次握手最后一个ack包为GET请求<br>• GET请求&gt;1个数据包,toa无法插入<br>– TCP - Sequence<br>• RealServer上timewait癿socket复用条件:seq递增</p>
+<h2 id="LVS-SYNPROXY">LVS-SYNPROXY</h2><h3 id="SYNPROXY用于防御synflood攻击">SYNPROXY用于防御synflood攻击</h3><p>– 主要思想:参照linux tcp协议栈中syncookies癿思想,<br>LVS-构造特殊seq癿synack包,验证ack包中ack_seq是否<br>合法-实现了TCP三次握手代理;<br>– 配置方式<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">virtual_server <span class="number">125.76</span><span class="number">.224</span><span class="number">.240</span> &#123;</span><br><span class="line">syn_proxySYNPROXY</span><br></pre></td></tr></table></figure></p>
+<h4 id="SYNPROXY实现原理">SYNPROXY实现原理</h4><p><img src="/images/LVS在淘宝环境中的应用/00-06-18.jpg" alt=""></p>
+<h4 id="SYNPROXY-设计考虑">SYNPROXY-设计考虑</h4><p>– TCP - Sequence<br>• Lvs-&gt;client 和 apache-&gt;lvs癿syn_ack包中seq不相同<br>– TCP OPT<br>• Lvs-&gt;client syn_ack包中tcp opt支持mss/wsale/sack<br>– Session reused<br>• 多个用户通过NAT网关用同一个ip/port访问LVS<br>– Ack Storm<br>• Tcp seq转换导致ack storm</p>
+<h2 id="LVS-CLUSTER">LVS-CLUSTER</h2><p><img src="/images/LVS在淘宝环境中的应用/00-07-06.jpg" alt=""></p>
+<h2 id="LVS-PERFORMANCE">LVS-PERFORMANCE</h2><h3 id="IPVS优化">IPVS优化</h3><p>– 多队列网卡,1个队列绑定到1个cpu核上<br>– 增大session hash table<br>– 增大session hash bucket lock个数<br>– 避免路由cache条目过多<br>– LOCKLESS<br>– 硬件:Westmere(第二代nehalem)/bios配置PERFORMANCE</p>
+<h3 id="单队列网卡">单队列网卡</h3><p>– 只有一个rx_buffer和一个tx_buffer;</p>
+<p><img src="/images/LVS在淘宝环境中的应用/00-10-42.jpg" alt=""></p>
+<h3 id="多队列网卡">多队列网卡</h3><p>– N个rx_buffer和N个tx_buffer, N=CPU核个数</p>
+<p><img src="/images/LVS在淘宝环境中的应用/00-10-58.jpg" alt=""></p>
+<h3 id="网卡中断–_CPU核">网卡中断– CPU核</h3><figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">– <span class="type">Cat</span> /<span class="keyword">proc</span>/interrupts</span><br><span class="line"><span class="number">54</span>: <span class="number">188324418</span> <span class="number">0</span> <span class="type">IR</span>-<span class="type">PCI</span>-<span class="type">MSI</span>-edge eth0-<span class="type">TxRx</span>-<span class="number">0</span></span><br><span class="line"><span class="number">55</span>: <span class="number">167573416</span> <span class="number">0</span> <span class="type">IR</span>-<span class="type">PCI</span>-<span class="type">MSI</span>-edge eth0-<span class="type">TxRx</span>-<span class="number">1</span></span><br><span class="line">– 绑定</span><br><span class="line">echo <span class="number">01</span> &gt; /<span class="keyword">proc</span>/irq/<span class="number">54</span>/smp_affinity</span><br><span class="line">echo <span class="number">02</span> &gt; /<span class="keyword">proc</span>/irq/<span class="number">55</span>/smp_affinity五 performance – 软多队列</span><br></pre></td></tr></table></figure>
+<h3 id="performance_–_软多队列">performance – 软多队列</h3><p>• 软多队列:RPS(receive packet steering)<br><img src="/images/LVS在淘宝环境中的应用/00-12-08.jpg" alt=""><br>• RPS配置<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">– cat /sys/<span class="keyword">class</span>/net/eth0/queues/rx-<span class="number">0</span>/rps_cpus</span><br><span class="line">cat /sys/<span class="keyword">class</span>/net/eth0/queues/rx-<span class="number">1</span>/rps_cpus</span><br><span class="line">– 绑定</span><br><span class="line">echo <span class="number">01</span> &gt; /sys/<span class="keyword">class</span>/net/eth0/queues/rx-<span class="number">0</span>/rps_cpus</span><br><span class="line">echo <span class="number">02</span> &gt; /sys/<span class="keyword">class</span>/net/eth0/queues/rx-<span class="number">1</span>/rps_cpusPERFORMANCE</span><br></pre></td></tr></table></figure></p>
+<h3 id="KEEPALIVED优化">KEEPALIVED优化</h3><p>– Select-&gt;epool<br>– 减少reload时间和开销</p>
+<h3 id="系统配置注意点">系统配置注意点</h3><p>– 关闭网卡LRO/GRO<br>– 关闭irqbalance<br>– 增大proc参数:net.core.netdev_max_backlogPERFORMANCE</p>
+<h3 id="性能指标">性能指标</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">– <span class="string">Synflood:</span><span class="number">350</span>w pps</span><br><span class="line">– Ack<span class="regexp">/rst/</span>fin-<span class="string">flood:</span><span class="number">800</span>w pps</span><br><span class="line">– <span class="string">HTTP:</span><span class="number">150</span>w pps</span><br><span class="line">– New tcp <span class="string">connection:</span><span class="number">30</span>w</span><br><span class="line">– MAX <span class="string">session:</span><span class="number">4000</span>w (<span class="number">24</span>G memory)</span><br><span class="line">机器:DELL R610(E5645 @ <span class="number">2.40</span>GHz), Intel <span class="number">82599</span> NIC,Todo List</span><br></pre></td></tr></table></figure>
+<h3 id="提高性能">提高性能</h3><p>– Ipvs:lockless<br>– Keepalived:多线程事件驱劢<br>– 新硬件:sandybridge - DDIO</p>
+<h3 id="完善功能">完善功能</h3><p>– 攻击防御:ip黑白名单…..<br>– 支持GRO(不支持LRO)<br>未来:4/7层合一<br>【注】：我对最后一部分PERFORMANCE不太理解</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag">#linux</a>
+          
+            <a href="/tags/lvs/" rel="tag">#lvs</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015-09-02-linux启动过程详解.html" rel="prev">linux启动过程详解</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/head.jpg" alt="cherishry" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">cherishry</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">勿忘初心，方得始终</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#个人简介"><span class="nav-number">1.</span> <span class="nav-text">个人简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主要内容"><span class="nav-number">2.</span> <span class="nav-text">主要内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LVS-简介"><span class="nav-number">3.</span> <span class="nav-text">LVS-简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介-why"><span class="nav-number">3.1.</span> <span class="nav-text">简介-why</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简介-what"><span class="nav-number">3.2.</span> <span class="nav-text">简介-what</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#NAT工作模式"><span class="nav-number">3.2.1.</span> <span class="nav-text">NAT工作模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TUNNEL工作模式"><span class="nav-number">3.2.2.</span> <span class="nav-text">TUNNEL工作模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DR工作模式"><span class="nav-number">3.2.3.</span> <span class="nav-text">DR工作模式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简介-应用"><span class="nav-number">3.3.</span> <span class="nav-text">简介-应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LVS"><span class="nav-number">3.3.1.</span> <span class="nav-text">LVS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q"><span class="nav-number">3.3.2.</span> <span class="nav-text">Q</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#A"><span class="nav-number">3.3.3.</span> <span class="nav-text">A</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Keepalived_–_LVS管理软件"><span class="nav-number">3.3.4.</span> <span class="nav-text">Keepalived – LVS管理软件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">3.4.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DR模式-不足"><span class="nav-number">3.4.1.</span> <span class="nav-text">DR模式-不足</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NAT模式-不足"><span class="nav-number">3.4.2.</span> <span class="nav-text">NAT模式-不足</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TUNNEL-不足"><span class="nav-number">3.4.3.</span> <span class="nav-text">TUNNEL-不足</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方法"><span class="nav-number">3.5.</span> <span class="nav-text">解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#FULLNAT转发模式"><span class="nav-number">3.5.1.</span> <span class="nav-text">FULLNAT转发模式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FULLNAT"><span class="nav-number">4.</span> <span class="nav-text">FULLNAT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NAT实现原理"><span class="nav-number">4.1.</span> <span class="nav-text">NAT实现原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FULLNAT实现原理"><span class="nav-number">4.2.</span> <span class="nav-text">FULLNAT实现原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NAT-HOOK点"><span class="nav-number">4.3.</span> <span class="nav-text">NAT-HOOK点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FULLNAT-HOOK点"><span class="nav-number">4.4.</span> <span class="nav-text">FULLNAT-HOOK点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NAT-session表"><span class="nav-number">4.5.</span> <span class="nav-text">NAT-session表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FULLNAT-session表"><span class="nav-number">4.6.</span> <span class="nav-text">FULLNAT-session表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FULLNAT-获取client_address(TOA)"><span class="nav-number">4.7.</span> <span class="nav-text">FULLNAT-获取client address(TOA)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FULLNAT-设计考虑"><span class="nav-number">4.8.</span> <span class="nav-text">FULLNAT-设计考虑</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LVS-SYNPROXY"><span class="nav-number">5.</span> <span class="nav-text">LVS-SYNPROXY</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SYNPROXY用于防御synflood攻击"><span class="nav-number">5.1.</span> <span class="nav-text">SYNPROXY用于防御synflood攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SYNPROXY实现原理"><span class="nav-number">5.1.1.</span> <span class="nav-text">SYNPROXY实现原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SYNPROXY-设计考虑"><span class="nav-number">5.1.2.</span> <span class="nav-text">SYNPROXY-设计考虑</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LVS-CLUSTER"><span class="nav-number">6.</span> <span class="nav-text">LVS-CLUSTER</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LVS-PERFORMANCE"><span class="nav-number">7.</span> <span class="nav-text">LVS-PERFORMANCE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IPVS优化"><span class="nav-number">7.1.</span> <span class="nav-text">IPVS优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单队列网卡"><span class="nav-number">7.2.</span> <span class="nav-text">单队列网卡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多队列网卡"><span class="nav-number">7.3.</span> <span class="nav-text">多队列网卡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网卡中断–_CPU核"><span class="nav-number">7.4.</span> <span class="nav-text">网卡中断– CPU核</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#performance_–_软多队列"><span class="nav-number">7.5.</span> <span class="nav-text">performance – 软多队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KEEPALIVED优化"><span class="nav-number">7.6.</span> <span class="nav-text">KEEPALIVED优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统配置注意点"><span class="nav-number">7.7.</span> <span class="nav-text">系统配置注意点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性能指标"><span class="nav-number">7.8.</span> <span class="nav-text">性能指标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提高性能"><span class="nav-number">7.9.</span> <span class="nav-text">提高性能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完善功能"><span class="nav-number">7.10.</span> <span class="nav-text">完善功能</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cherishry</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

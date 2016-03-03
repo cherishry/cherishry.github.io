@@ -1,0 +1,693 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="勿忘初心，方得始终" />
+
+
+
+  <meta name="keywords" content="linux服务管理," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="服务管理服务的介绍在开始介绍如何管理Linux的服务前，先为你介绍Linux的服务究竟有哪些。这些服务的分类方法，以及一些关于服务的基本概念
+服务的种类Linux提供了许多的服务。这些服务，可以使依照其功能和依照服务启动的方法与执行时的特性进行分类。
+依照功能分类：
+
+系统服务
+
+— 某些服务的服务对象是Linux系统本身，或者Linux系统用户，这类的服务我们称为系统服务（System Serv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="服务管理">
+<meta property="og:url" content="http://cherishry.github.io/2015-09-04-服务管理.html">
+<meta property="og:site_name" content="cherishry's Blog">
+<meta property="og:description" content="服务管理服务的介绍在开始介绍如何管理Linux的服务前，先为你介绍Linux的服务究竟有哪些。这些服务的分类方法，以及一些关于服务的基本概念
+服务的种类Linux提供了许多的服务。这些服务，可以使依照其功能和依照服务启动的方法与执行时的特性进行分类。
+依照功能分类：
+
+系统服务
+
+— 某些服务的服务对象是Linux系统本身，或者Linux系统用户，这类的服务我们称为系统服务（System Serv">
+<meta property="og:updated_time" content="2016-03-03T09:19:08.673Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="服务管理">
+<meta name="twitter:description" content="服务管理服务的介绍在开始介绍如何管理Linux的服务前，先为你介绍Linux的服务究竟有哪些。这些服务的分类方法，以及一些关于服务的基本概念
+服务的种类Linux提供了许多的服务。这些服务，可以使依照其功能和依照服务启动的方法与执行时的特性进行分类。
+依照功能分类：
+
+系统服务
+
+— 某些服务的服务对象是Linux系统本身，或者Linux系统用户，这类的服务我们称为系统服务（System Serv">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'always'
+  };
+</script>
+
+  <title> 服务管理 | cherishry's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">cherishry's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-next-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              服务管理
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-09-04T15:03:31+08:00" content="2015-09-04">
+            2015-09-04
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/linux/" itemprop="url" rel="index">
+                  <span itemprop="name">linux</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h1 id="服务管理">服务管理</h1><h2 id="服务的介绍">服务的介绍</h2><p>在开始介绍如何管理Linux的服务前，先为你介绍Linux的服务究竟有哪些。这些服务的分类方法，以及一些关于服务的基本概念</p>
+<h2 id="服务的种类">服务的种类</h2><p>Linux提供了许多的服务。这些服务，可以使依照其功能和依照服务启动的方法与执行时的特性进行分类。</p>
+<p><strong>依照功能分类：</strong></p>
+<ul>
+<li>系统服务</li>
+</ul>
+<p>— 某些服务的服务对象是Linux系统本身，或者Linux系统用户，这类的服务我们称为系统服务（System Service）</p>
+<ul>
+<li>网络服务</li>
+</ul>
+<p>— 提供给网络中的其他客户端（Clients）调用使用的服务，这类的服务我们统称为网络服务（Networking Service）。</p>
+<p><strong>依照服务启动的方法分类</strong></p>
+<p>*独立系统服务</p>
+<p>— 服务一经启动，除非因为关闭系统或者管理者手动结束，否则都将在后台执行，不管有没有被用到。这样的服务我们称为独立系统服务(Standalone Service)。 独立系统服务有时候又被称为Sys V服务 （Sys V Service）</p>
+<ul>
+<li>临时服务</li>
+</ul>
+<p>— 与独立系统服务不同，临时服务（Transient Service）平时并不会启动，而是当客户端需要时才会被启动，使用完毕会结束。 </p>
+<h2 id="服务的管理">服务的管理</h2><h3 id="手动的管理独立系统服务">手动的管理独立系统服务</h3><p> 为了简化Linux服务管理的麻烦，Linux特别为每一个独立式的服务，提供了一个服务启动程序文件（Service Startup Script）。</p>
+<p>所有的服务启动文件被储存在<code>/etc/rc.d/init.d/</code>目录下 </p>
+<h3 id="如何利用脚本直接管理服务">如何利用脚本直接管理服务</h3><h4 id="直接执行启动程序文件(rhel6与rhel7均可使用)">直接执行启动程序文件(rhel6与rhel7均可使用)</h4><p> <code>/etc/rc.d/init.d/</code>里面每一个文件就是某一个服务的启动程序文件，你可以直接执行某一个启动程序文件，借以来启动或者停止该服务</p>
+<p>不同的服务启动文件可能会有不同的动作参数：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby"> start： 启动这个服务</span><br><span class="line"></span></span><br><span class="line">-<span class="ruby"> stop：  停止这个服务</span><br><span class="line"></span></span><br><span class="line">-<span class="ruby"> restart： 先停止，再启动，也就是重新启动的意思。</span><br><span class="line"></span></span><br><span class="line">-<span class="ruby"> reload： 重载配置文件，这个参数只有在服务已经启动的状况下才     能使用。</span><br><span class="line"></span></span><br><span class="line">-<span class="ruby"> condrestart：有条件的重新启动，这个服务必须是已经启动的，才会被重新启动；如果这个服务尚未启动，则无须启动之。</span><br><span class="line"></span></span><br><span class="line">-<span class="ruby"> status： 查看目前服务的启动状态。</span></span><br></pre></td></tr></table></figure>
+<p>eg.</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/iprdump <span class="keyword">status</span></span><br></pre></td></tr></table></figure>
+<h4 id="service命令管理方法(rhel6与rhel7均可使用)">service命令管理方法(rhel6与rhel7均可使用)</h4><p>用法：<code>service  servicename  action</code></p>
+<p>动作参数：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">start</span>|<span class="keyword">stop</span>|<span class="keyword">status</span></span></span><br></pre></td></tr></table></figure>
+<p>eg.</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service httpd <span class="keyword">status</span></span><br></pre></td></tr></table></figure>
+<h4 id="systemctl命令管理方法(适用与rhel7)">systemctl命令管理方法(适用与rhel7)</h4><p>用法：<code>systemctl servicename action</code></p>
+<p>动作参数：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">systemctl		status 	servicename		<span class="comment">##查看服务状态			</span></span><br><span class="line">			stop   					<span class="comment">##关闭服务</span></span><br><span class="line">			start						<span class="comment">##开启服务</span></span><br><span class="line">			restart 					<span class="comment">##重启服务</span></span><br><span class="line">			reload  					<span class="comment">##重新加载服务配置</span></span><br><span class="line">			enable  					<span class="comment">##设定服务开机启动</span></span><br><span class="line">			disable 					<span class="comment">##设定服务开机关闭</span></span><br><span class="line">			mask					<span class="comment">##锁定服务</span></span><br><span class="line">			unmask					<span class="comment">##解锁服务</span></span><br><span class="line">			<span class="type">list</span>-dependencies 			<span class="comment">##查看服务的依赖关系</span></span><br><span class="line"></span><br><span class="line">systemctl		<span class="type">list</span>-unit-files				<span class="comment">##查看所有服务的开机启动情况</span></span><br><span class="line">			<span class="type">list</span>-units					<span class="comment">##查看服务当前状态</span></span><br></pre></td></tr></table></figure>
+<p>eg.</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="keyword">status</span> httpd</span><br></pre></td></tr></table></figure>
+<h2 id="守护进程">守护进程</h2><p> <code>xinetd</code>是一个特殊的程序，不断监控所有通讯端口。一旦有客户端调用某一个启动文件时，这个程序就要负责启动该服务；而在客户端使用完毕后，该程序也必须要负责结束。</p>
+<p>守护进程服务位置：<code>/etc/xinetd.d</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service    xinetd      <span class="operator"><span class="keyword">start</span>/<span class="keyword">stop</span>/<span class="keyword">status</span></span></span><br></pre></td></tr></table></figure>
+<p>【注】：有关网络守护进程服务程序xinetd请阅读另外一篇文章【网络守护进程服务程序–xinetd的详解】</p>
+<h2 id="服务的开机自启动">服务的开机自启动</h2><p>Chkconfig命令主要用来更新（启动或停止）和查询系统服务的运行级信息。</p>
+<p>【谨记】chkconfig不是立即自动禁止或激活一个服务，它只是简单的改变了符号连接</p>
+<p>Chkconfig [–add][–del][–list][系统服务]或chkconfig [–level  \&lt; 等级符号>][系统服务][on/off/reset]</p>
+<p>参数用法：</p>
+<p>–add 增加所指定的系统服务，让chkconfig指令得以管理它，并同时在系统启动的叙述文件内增加相关数据</p>
+<p>–del 删除所指定的系统服务，不再由chkconfig指令管理它，并同时在系统启动的叙述文件内删除相关数据</p>
+<p>–devel 等级代号，指定读系统系统服务要在哪一个执行等级中开启或关闭</p>
+<ul>
+<li>等级0：表示关机</li>
+<li>等级1：单用户模式</li>
+<li>等级2：无网络连接的多用户命令行模式</li>
+<li>等级3：有网络连接的多用户命令行模式</li>
+<li>等级4：不可用</li>
+<li>等级5：带图形界面的多用户模式</li>
+<li>等级6：重新启动</li>
+</ul>
+<p>需要说明的是，level选项可以指定要查看的运行级而不一定是当前运行级。对于每个运行级，只能有一个启动脚本或者停止脚本。当切换运行级时，init不会重新启动已经启动的服务，也不会再次去停止已经停止的服务。</p>
+<ul>
+<li><p>chkconfig –list [name]:显示所有运行级系统服务的运行状态信息（on或off），如果指定了name，那么只显示指定的服务在不同运行级的状态。</p>
+</li>
+<li><p>chkconfig –add name：增加一项新的服务。chkconfig确保每个运行级有一项启动(S)或者杀死(K)入口。如有缺少，则会从缺省的init脚本自动建立。</p>
+</li>
+<li><p>chkconfig –del name：删除服务，并把相关符号连接从/etc/rc[0-6].d删除。</p>
+</li>
+<li><p>chkconfig [–level levels] name：设置某一服务在指定的运行级是被启动，停止还是重置。</p>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">chkconfig --<span class="built_in">list</span> 				<span class="preprocessor">#列出系统所有的服务启动情况</span></span><br><span class="line">chkconfig --add httpd 			<span class="preprocessor">#增加httpd服务</span></span><br><span class="line">chkconfig --del httpd 			<span class="preprocessor">#删除httpd服务</span></span><br><span class="line">chkconfig --<span class="built_in">list</span> mysqld 			<span class="preprocessor">#列出mysqld服务设置情况</span></span><br><span class="line">chkconfig --level <span class="number">35</span> mysqld on 	<span class="preprocessor">#设定mysqld在等级<span class="number">3</span>和<span class="number">5</span>为开机运行服务，--level <span class="number">35</span>表示操作只在等级<span class="number">3</span>和<span class="number">5</span>执行，on表示启动，off表示关闭</span></span><br><span class="line">chkconfig mysqld on 			<span class="preprocessor">#设定mysqld在各等级为on，“各等级”包括<span class="number">2</span>、<span class="number">3</span>、<span class="number">4</span>、<span class="number">5</span>等级</span></span><br></pre></td></tr></table></figure>
+<p>【注】rhel7里面也可以使用systemctl disable/enable servicename来管理服务的开机是否自启动</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux服务管理/" rel="tag">#linux服务管理</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015-09-15-htop.html" rel="prev">Linux下取代top的进程管理工具 htop</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015-09-04-有关用户管理的文件内容及其解释(passwd,shadow,login.defs).html" rel="next">有关用户管理的文件内容及其解释</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/head.jpg" alt="cherishry" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">cherishry</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">勿忘初心，方得始终</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#服务管理"><span class="nav-number">1.</span> <span class="nav-text">服务管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#服务的介绍"><span class="nav-number">1.1.</span> <span class="nav-text">服务的介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务的种类"><span class="nav-number">1.2.</span> <span class="nav-text">服务的种类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务的管理"><span class="nav-number">1.3.</span> <span class="nav-text">服务的管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#手动的管理独立系统服务"><span class="nav-number">1.3.1.</span> <span class="nav-text">手动的管理独立系统服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何利用脚本直接管理服务"><span class="nav-number">1.3.2.</span> <span class="nav-text">如何利用脚本直接管理服务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#直接执行启动程序文件(rhel6与rhel7均可使用)"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">直接执行启动程序文件(rhel6与rhel7均可使用)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#service命令管理方法(rhel6与rhel7均可使用)"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">service命令管理方法(rhel6与rhel7均可使用)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#systemctl命令管理方法(适用与rhel7)"><span class="nav-number">1.3.2.3.</span> <span class="nav-text">systemctl命令管理方法(适用与rhel7)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#守护进程"><span class="nav-number">1.4.</span> <span class="nav-text">守护进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务的开机自启动"><span class="nav-number">1.5.</span> <span class="nav-text">服务的开机自启动</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cherishry</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>
