@@ -1,0 +1,645 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="勿忘初心，方得始终" />
+
+
+
+  <meta name="keywords" content="linux,基础命令," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="linux基础命令分类总结危险的系统命令1/bin/mv,/bin/rm,/bin/dd,/sbin/fdisk,/sbin/sfdisk,/sbin/parted
+线上查询及帮助命令1man,info,locate,whatis
+目录操作命令1ls,tree,pwd,mkdir,rmdir,cd,rm
+文件操作命令1touch,cp,mv,rm,ln,find,rename
+文件查看及处理命令1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux基础命令分类总结">
+<meta property="og:url" content="http://cherishry.github.io/2015-09-08-linux基础命令分类总结.html">
+<meta property="og:site_name" content="cherishry's Blog">
+<meta property="og:description" content="linux基础命令分类总结危险的系统命令1/bin/mv,/bin/rm,/bin/dd,/sbin/fdisk,/sbin/sfdisk,/sbin/parted
+线上查询及帮助命令1man,info,locate,whatis
+目录操作命令1ls,tree,pwd,mkdir,rmdir,cd,rm
+文件操作命令1touch,cp,mv,rm,ln,find,rename
+文件查看及处理命令1">
+<meta property="og:updated_time" content="2016-03-05T06:14:15.665Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux基础命令分类总结">
+<meta name="twitter:description" content="linux基础命令分类总结危险的系统命令1/bin/mv,/bin/rm,/bin/dd,/sbin/fdisk,/sbin/sfdisk,/sbin/parted
+线上查询及帮助命令1man,info,locate,whatis
+目录操作命令1ls,tree,pwd,mkdir,rmdir,cd,rm
+文件操作命令1touch,cp,mv,rm,ln,find,rename
+文件查看及处理命令1">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'always'
+  };
+</script>
+
+  <title> linux基础命令分类总结 | cherishry's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">cherishry's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-next-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              linux基础命令分类总结
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-09-08T09:51:23+08:00" content="2015-09-08">
+            2015-09-08
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/linux-命令/" itemprop="url" rel="index">
+                  <span itemprop="name">linux-命令</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h1 id="linux基础命令分类总结">linux基础命令分类总结</h1><h2 id="危险的系统命令">危险的系统命令</h2><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/bin/m</span>v,<span class="regexp">/bin/</span>rm,<span class="regexp">/bin/</span>dd,<span class="regexp">/sbin/</span>fdisk,<span class="regexp">/sbin/</span>sfdisk,<span class="regexp">/sbin/</span>parted</span><br></pre></td></tr></table></figure>
+<h2 id="线上查询及帮助命令">线上查询及帮助命令</h2><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">man</span>,<span class="preprocessor">info</span>,locate,whatis</span><br></pre></td></tr></table></figure>
+<h2 id="目录操作命令">目录操作命令</h2><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ls</span>,tree,<span class="keyword">pwd</span>,<span class="keyword">mkdir</span>,<span class="keyword">rmdir</span>,<span class="keyword">cd</span>,<span class="keyword">rm</span></span><br></pre></td></tr></table></figure>
+<h2 id="文件操作命令">文件操作命令</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch,<span class="keyword">cp</span>,mv,rm,<span class="keyword">ln</span>,<span class="keyword">find</span>,<span class="built_in">rename</span></span><br></pre></td></tr></table></figure>
+<h2 id="文件查看及处理命令">文件查看及处理命令</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cat</span>,more,less,<span class="keyword">grep</span>,head,tac,tail,cut,paste,<span class="built_in">sort</span>,<span class="keyword">sor</span>,uniq,wc,<span class="built_in">iconv</span>,dos2unix,<span class="keyword">file</span>,diff,egrep,chattr,lsattr,rev,vimdiff</span><br></pre></td></tr></table></figure>
+<h2 id="文件打包压缩命令">文件打包压缩命令</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzip,bzip2,tar,unzip,gunzip</span><br></pre></td></tr></table></figure>
+<h2 id="信息显示命令">信息显示命令</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname,<span class="built_in">hostname</span>,dmesg,uptime,<span class="keyword">file</span>,stat,du,df,top,free,<span class="keyword">w</span>,date,<span class="keyword">cal</span>,apropos</span><br></pre></td></tr></table></figure>
+<h2 id="搜索文件命令">搜索文件命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span>,whereis,locate,find</span><br></pre></td></tr></table></figure>
+<h2 id="用户管理命令">用户管理命令</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd,userdel,passwd,chage,usermod,<span class="property">id</span>,su,sudo,visudo</span><br></pre></td></tr></table></figure>
+<h2 id="用户组管理命令">用户组管理命令</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupadd,groupdel,groups,newgrp</span><br></pre></td></tr></table></figure>
+<h2 id="基本网络操作命令">基本网络操作命令</h2><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">telnet,ssh,scp,wget,<span class="built_in">ping</span>,route,ifconfig,ifup,ifdown,netstat</span><br></pre></td></tr></table></figure>
+<h2 id="深入网络操作命令">深入网络操作命令</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route,mail,mutt,nslookup,<span class="keyword">dig</span>,wget</span><br></pre></td></tr></table></figure>
+<h2 id="有关磁盘空间的命令">有关磁盘空间的命令</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount,umount,df,du,fdisk,<span class="tag">dd</span>,dump</span><br></pre></td></tr></table></figure>
+<h2 id="有关关机和查看系统信息的命令">有关关机和查看系统信息的命令</h2><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutdown,reboot,ps,top,<span class="built_in">kill</span>,<span class="built_in">date</span>,cal</span><br></pre></td></tr></table></figure>
+<h2 id="安装和登录命令">安装和登录命令</h2><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">login,<span class="built_in">shutdown</span>,halt,reboot,mount,umount</span><br></pre></td></tr></table></figure>
+<h2 id="系统管理相关命令">系统管理相关命令</h2><figure class="highlight irpf90"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">top,<span class="keyword">free</span>,vmstat,mpstat,<span class="keyword">iostat</span>,sar,kill,chkconfig,last</span><br></pre></td></tr></table></figure>
+<h2 id="系统安全相关命令">系统安全相关命令</h2><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd,su,sudo,<span class="keyword">umask</span>,chgrp,<span class="keyword">chmod</span>,<span class="keyword">chown</span>,charrt,lsattr,ps,who,whoami,w</span><br></pre></td></tr></table></figure>
+<h2 id="查看系统用户登录信息命令">查看系统用户登录信息命令</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w,who,users,<span class="keyword">last</span>,lastlog,fingers</span><br></pre></td></tr></table></figure>
+<h2 id="查看硬件相关命令">查看硬件相关命令</h2><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ethtool,、mii-tool、 dmidecode、 dmesg、 lspci -v、 kuduz</span><br><span class="line">用硬件检测程序kuduz检测新硬件：service kudzu start <span class="comment">(or restart)</span></span><br><span class="line">dmesg <span class="comment">(查看所有启动时检测到的硬件信息)</span></span><br><span class="line">lspci <span class="comment">(显示外设信息，如usb,网卡等信息)</span></span><br></pre></td></tr></table></figure>
+<h2 id="监视物理组件的高级linux命令">监视物理组件的高级linux命令</h2><figure class="highlight irpf90"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">内存：top,<span class="keyword">free</span>,vmstat,mpstat,<span class="keyword">iostat</span>,sar</span><br><span class="line">CPU:top,vmstat,mpstat,<span class="keyword">iostat</span>,sar</span><br><span class="line">I/O:vmstat,mpstat,<span class="keyword">iostat</span>,sar</span><br><span class="line">进程：ps,ipcs,ipcrm</span><br><span class="line">负载：uptime</span><br></pre></td></tr></table></figure>
+<h2 id="cpu型号">cpu型号</h2><figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep name /<span class="keyword">proc</span>/cpuinfo</span><br></pre></td></tr></table></figure>
+<h2 id="查看linux系统的版本内核等信息">查看linux系统的版本内核等信息</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/redhat-release <span class="preprocessor"># 同 lsb_release -d </span></span><br><span class="line">uname -r <span class="preprocessor"># 内核版本号</span></span><br><span class="line">uname -m <span class="preprocessor"># 是<span class="number">32</span>位还是<span class="number">64</span>位，x86_64表示<span class="number">64</span>位</span></span><br><span class="line">uname -a ; lsb_release -a <span class="preprocessor">#查看更多信息</span></span><br></pre></td></tr></table></figure>
+<h2 id="关机/重启/注销命令">关机/重启/注销命令</h2><p>关机：<br><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">shutdown</span> -h <span class="built_in">now</span> <span class="preprocessor"># 立即关机（生产常用）</span></span><br><span class="line"><span class="built_in">shutdown</span> -h +<span class="number">1</span> <span class="preprocessor"># 1分钟以后关机</span></span><br><span class="line">init <span class="number">0</span></span><br><span class="line">halt <span class="preprocessor"># 立即停止系统，需要人工关闭电源</span></span><br><span class="line">halt -p</span><br><span class="line">poweroff <span class="preprocessor"># 立即停止系统，并且关闭电源</span></span><br></pre></td></tr></table></figure></p>
+<p>重启：<br><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">reboot (生产常用)</span><br><span class="line"><span class="built_in">shutdown</span> -r <span class="built_in">now</span> (生产常用)</span><br><span class="line"><span class="built_in">shutdown</span> -r +<span class="number">1</span> <span class="preprocessor"># 1 分钟以后重启</span></span><br><span class="line">init <span class="number">6</span></span><br><span class="line">注销：</span><br><span class="line">logout</span><br><span class="line"><span class="keyword">exit</span> (生产常用)</span><br><span class="line">ctl+d (生产常用) <span class="preprocessor"># 快捷键</span></span><br></pre></td></tr></table></figure></p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag">#linux</a>
+          
+            <a href="/tags/基础命令/" rel="tag">#基础命令</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015-09-15-htop.html" rel="prev">Linux下取代top的进程管理工具 htop</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015-09-04-服务管理.html" rel="next">服务管理</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/head.jpg" alt="cherishry" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">cherishry</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">勿忘初心，方得始终</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#linux基础命令分类总结"><span class="nav-number">1.</span> <span class="nav-text">linux基础命令分类总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#危险的系统命令"><span class="nav-number">1.1.</span> <span class="nav-text">危险的系统命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线上查询及帮助命令"><span class="nav-number">1.2.</span> <span class="nav-text">线上查询及帮助命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录操作命令"><span class="nav-number">1.3.</span> <span class="nav-text">目录操作命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件操作命令"><span class="nav-number">1.4.</span> <span class="nav-text">文件操作命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件查看及处理命令"><span class="nav-number">1.5.</span> <span class="nav-text">文件查看及处理命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件打包压缩命令"><span class="nav-number">1.6.</span> <span class="nav-text">文件打包压缩命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信息显示命令"><span class="nav-number">1.7.</span> <span class="nav-text">信息显示命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索文件命令"><span class="nav-number">1.8.</span> <span class="nav-text">搜索文件命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户管理命令"><span class="nav-number">1.9.</span> <span class="nav-text">用户管理命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户组管理命令"><span class="nav-number">1.10.</span> <span class="nav-text">用户组管理命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本网络操作命令"><span class="nav-number">1.11.</span> <span class="nav-text">基本网络操作命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深入网络操作命令"><span class="nav-number">1.12.</span> <span class="nav-text">深入网络操作命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有关磁盘空间的命令"><span class="nav-number">1.13.</span> <span class="nav-text">有关磁盘空间的命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有关关机和查看系统信息的命令"><span class="nav-number">1.14.</span> <span class="nav-text">有关关机和查看系统信息的命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装和登录命令"><span class="nav-number">1.15.</span> <span class="nav-text">安装和登录命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统管理相关命令"><span class="nav-number">1.16.</span> <span class="nav-text">系统管理相关命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统安全相关命令"><span class="nav-number">1.17.</span> <span class="nav-text">系统安全相关命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看系统用户登录信息命令"><span class="nav-number">1.18.</span> <span class="nav-text">查看系统用户登录信息命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看硬件相关命令"><span class="nav-number">1.19.</span> <span class="nav-text">查看硬件相关命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监视物理组件的高级linux命令"><span class="nav-number">1.20.</span> <span class="nav-text">监视物理组件的高级linux命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cpu型号"><span class="nav-number">1.21.</span> <span class="nav-text">cpu型号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看linux系统的版本内核等信息"><span class="nav-number">1.22.</span> <span class="nav-text">查看linux系统的版本内核等信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关机/重启/注销命令"><span class="nav-number">1.23.</span> <span class="nav-text">关机/重启/注销命令</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cherishry</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>
